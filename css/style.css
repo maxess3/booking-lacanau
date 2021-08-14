@@ -1,0 +1,584 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+    list-style: none;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+button, input[type="button"]{
+    -webkit-appearance: none;
+}
+
+@keyframes opacity {
+    0%{
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes blob {
+    0%{
+        transform: scale(1);
+        opacity: 0.95;
+    }
+    50%{
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100%{
+        transform: scale(1);
+        opacity: 0.95;
+    }
+}
+
+@keyframes bookingcardpersonnal {
+    0%{
+        border: 5px dotted transparent; 
+    }
+    50%{
+        border: 5px dotted rgb(0, 101, 164);
+
+    }
+    100%{
+        border: 5px dotted transparent;
+    }
+}
+
+::placeholder{
+    color: rgb(46, 46, 46);
+    font-size: 1.1em;
+}
+
+.maxime{
+    font-size: 0.8em;
+    display: block;
+    margin-top: 10px;
+    opacity: 0.6;
+}
+
+video{
+    width: 100%;
+}
+
+input{
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+input[type="date"], input[type="time"], input[type="number"]{
+    color: rgb(46, 46, 46);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+input:focus{
+    outline: none;
+    border: 0 none;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    width: 100%;
+}
+
+#booking-ctn{
+    width: 100%;
+}
+
+#main-ctn{
+    position: relative;
+    height: 100vh;
+    min-height: 900px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.video{
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#lacanau-video{
+    width: auto;
+    height: 100%;
+}
+
+.child-main-ctn{
+    position: relative;
+    background-color: rgba(0,0,0,0.4);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-ctn{
+    margin: 20px auto;
+    width: 90%;
+    padding: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo img{
+    width: 3em;
+}
+
+.profile-ctn{
+    background-color: rgb(218, 218, 218);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.inner-profile-ctn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.inner-profile-ctn img{
+    width: 1.2em;
+}
+
+.booking-text{
+    height: 100%;
+    width: 90%;
+    margin: 80px auto;
+    flex-direction: column;
+}
+
+.text-info{
+   margin-bottom: 80px;
+}
+
+.text-info > h1{
+    font-size: 4em;
+}
+
+.text-info > h3{
+    font-size: 1.5em;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.text-info > p{
+    font-weight: 300;
+    font-size: 1.2em;
+}
+
+.inner-form{
+    animation: opacity 0.6s ease-out;
+    display: flex;
+    max-width: 1300px;
+    background-color: rgb(232, 232, 232);
+    border-radius: 20px;
+    box-shadow: 10px 10px 101px -26px rgba(0,0,0,0.57);
+    -webkit-box-shadow: 10px 10px 101px -26px rgba(0,0,0,0.57);
+    -moz-box-shadow: 10px 10px 101px -26px rgba(0,0,0,0.57);
+}
+
+.inner-form > div:not(.inner-form div:last-child){
+    padding: 30px;
+    width: 100%;
+}
+
+.inner-form > div > input:not(.inner-form div:last-child input:last-child){
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.inner-form div label{
+    color: rgb(169, 169, 169);
+    margin-bottom: 4px;
+}
+
+.inner-form div input{
+    width: 100%;
+}
+
+.btn-booking{
+    padding: 15px 20px 15px 15px;
+}
+
+.btn-booking button{
+    border: 0;
+    position: relative;
+    padding: 20px 30px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #0083bb;
+    cursor: pointer;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: all 0.2s ease;
+}
+
+.btn-booking button:hover{
+    transition: all 0.2s ease;
+    background-color: #00567b;
+}
+
+.btn-booking button:focus{
+    background-color: rgb(85, 85, 85);
+}
+
+.view-booking-ctn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.view-booking-inner{
+    position: absolute;
+    bottom: 0;
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(34, 34, 34);
+}
+
+.view-booking-ctn input{
+    padding: 20px 50px;
+    border-radius: 10px;
+    color: rgb(199, 199, 199);
+    background-color: #343434;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.view-booking-ctn input:hover{
+    color: rgb(233, 233, 233);
+    transition: all 0.2s ease;
+    background-color: #2b2b2b;
+}
+
+#list-booking-ctn{
+    padding-bottom: 60px;
+    background-color: rgb(34, 34, 34);
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.list-booking-inner{
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 1200px;
+  margin: 50px auto;
+}
+
+.booking-card{
+  position: relative;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  background-color: #2b2b2b;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.card-info-people{
+  background-color: #6a6a6a;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.card-info-booking{
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.2em;
+}
+
+.card-info-people span:first-child{
+    font-size: 1.4em;
+    color: rgb(244, 244, 244);
+}
+
+.card-info-people span:last-child{
+    font-size: 1em;
+    color: rgb(213, 213, 213);
+}
+
+.date-booking{
+    display: flex;
+    justify-content: space-around;
+    font-size: 1em;
+    margin-top: -20px;
+}
+
+.date-booking span{
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+}
+
+.date-booking:last-child{
+    font-weight: 300 !important;
+    margin-top: -15px;
+    font-size: 0.9em;
+}
+
+.date-checkin,.date-checkout{
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.date-checkin{
+    opacity: 0.9;
+}
+
+.card-info-booking > span:last-child{
+    display: block;
+    margin-top: -10px;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.card-info-booking > span:last-child span{
+    display: inline-block;
+    background-color: #6a6a6a;
+    padding: 5px 17px;
+    border-radius: 50%;
+    animation: blob 1s ease infinite;
+}
+
+.title-info-booking{
+    margin-bottom: 25px;
+    font-size: 0.8em;
+    opacity: 0.8;
+    text-transform: uppercase;
+    color: rgb(227, 227, 227);
+    margin-top: 20px;
+    text-align: center;
+}
+
+.user-icon-card{
+    width: 1.3em;
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+}
+
+.unique-card-color{
+    border: 5px dotted transparent;
+    animation: bookingcardpersonnal 1.5s ease-in infinite;
+    background-color: #0083bb !important;
+}
+
+.unique-people-number{
+    background-color: #0083bb !important;
+}
+
+.no-booking{
+    background-color: rgb(41, 41, 41);
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    padding: 20px 50px;
+    -webkit-box-shadow: 8px 8px 20px 7px rgba(0,0,0,0.15); 
+    box-shadow: 8px 8px 20px 7px rgba(0,0,0,0.15);  
+}
+
+.no-booking p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2em;
+    color: rgb(210, 210, 210);
+}
+
+.no-booking-icon{
+    width: 2.1em;
+    margin-right: 20px;
+}
+
+.delete-booking{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background-color: rgb(157, 157, 157);
+    right: -15px;
+    border-radius: 50%;
+    top: -15px; 
+    transition: all 0.2s ease-out;
+    opacity: 0.9;
+}
+
+.delete-booking:hover{
+    transition: all 0.2s ease;
+    opacity: 1;
+    background-color: rgb(172, 41, 41);
+}
+
+.delete-booking img{
+    width: 1.5em;
+}
+
+@media screen and (min-height: 1200px) {
+    #main-ctn{
+        max-height: 1200px;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .inner-form > div:not(.inner-form div:last-child){
+        padding: 30px 15px;
+        width: 100%;
+        font-size: 1em;
+    }
+    .btn-booking button{
+        padding: 10px 15px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .list-booking-inner{
+        width: 800px;
+        margin: 50px auto;
+      }
+      .view-booking-inner input{
+        padding: 20px 40px;
+      }
+}
+
+@media screen and (max-width: 1120px) {
+    .btn-booking button{
+        padding: 20px 20px;
+    }
+    input[type="date"], input[type="time"], input[type="number"]{
+        font-size: 0.90em;
+    }
+    .inner-form div label{
+        font-size: 0.90em;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    input[type="date"], input[type="time"], input[type="number"]{
+        font-size: 1em;
+    }
+
+    .inner-form div label{
+        font-size: 1em;
+    }
+
+    .video {
+        display: none;
+    }
+    
+    #main-ctn {
+        background: url("../assets/img/wave.webp");
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: initial;
+    }
+
+    .view-booking-inner{
+        position: unset;
+        margin-top: 40px;
+    }
+
+    .inner-form{
+        display: block;
+    }
+
+    .inner-form > div:not(.inner-form div:last-child){
+        padding: 30px;
+    }
+
+    .booking-text{
+        margin: auto;
+    }
+    
+    .btn-booking button{
+        padding: 20px 20px;
+        width: 100%;
+    }
+
+    .text-info{
+        margin-bottom: 40px;
+     }
+     
+     .text-info > h1{
+         font-size: 2.5em;
+         line-height: 1.2em;
+         margin-top: 5px;
+     }
+     
+     .text-info > h3{
+         font-size: 1.2em;
+     }
+     
+     .text-info > p{
+        font-size: 1.2em;
+        margin-top: 10px;
+     }
+
+     #list-booking-ctn{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .list-booking-inner{
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 0px auto;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,10 @@
+.custom-calendar{
+    background-color: red;
+    padding: 20px;
+    text-align: center;
+}
+
+.custom-calendar span{
+    background-color: blue;
+    display: block;
+}
