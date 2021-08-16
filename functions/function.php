@@ -58,6 +58,7 @@ function login($username,$password){
                     $_SESSION["firstname"] = $row["firstname"];
                     $_SESSION["lastname"] = $row["lastname"];
                     $_SESSION["password"] = $row["password"];
+                    $_SESSION["admin"] = $row["admin"];
                     header("Location: " . "../index.php");
                 } else {
                     header("Location: " . "../login.php?error=wrongLogin");
@@ -155,13 +156,14 @@ function getBooking($sessionUsername){
                 // Display personnal bookings cards
                 if($sessionUsername != false && ($sessionUsername == $username)){
                     echo "<div class=\"booking-card\">
+                    <div class=\"status\">En attente</div>
                     <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                         <div class=\"card-info-people unique-card-color\">
                             <span>$firstname $lastname</span>
                             <span>@$username</span>
                         </div>
                         <div class=\"card-info-booking\">
-                            <span class=\"title-info-booking\">À réservé du :</span>
+                            <span class=\"title-info-booking\">A réservé du :</span>
                             <div class=\"date-booking\">
                                 <span class=\"date-checkin\">$dateCheckInFR</span> 
                                 <span class=\"date-checkout\">$dateCheckOutFR</span>
@@ -173,6 +175,7 @@ function getBooking($sessionUsername){
                             <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                             <span><span class=\"unique-people-number\">$people</span></span>
                         </div>
+                        <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                         <div title=\"Add to Calendar\" class=\"addeventatc custom-calendar\" data-styling=\"none\">
                             Ajouter au calendrier
                             <span class=\"start\">$dateCalendarCheckInFR $hourCalendarCheckInFR</span>
@@ -185,12 +188,13 @@ function getBooking($sessionUsername){
                     </div>";
                 } else {
                     echo "<div class=\"booking-card\">
+                    <div class=\"status\">En attente</div>
                     <div class=\"card-info-people\">
                         <span>$firstname $lastname</span>
                         <span>@$username</span>
                     </div>
                     <div class=\"card-info-booking\">
-                        <span class=\"title-info-booking\">À réservé du :</span>
+                        <span class=\"title-info-booking\">A réservé du :</span>
                         <div class=\"date-booking\">
                             <span class=\"date-checkin\">$dateCheckInFR</span> 
                             <span class=\"date-checkout\">$dateCheckOutFR</span>
@@ -201,6 +205,16 @@ function getBooking($sessionUsername){
                         </div>
                         <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                         <span><span>$people</span></span>
+                        
+                    </div>
+                    <div title=\"Add to Calendar\" class=\"addeventatc custom-calendar\" data-styling=\"none\">
+                        Ajouter au calendrier
+                        <span class=\"start\">$dateCalendarCheckInFR $hourCalendarCheckInFR</span>
+                        <span class=\"end\">$dateCalendarCheckOutFR $hourCalendarCheckOutFR</span>
+                        <span class=\"timezone\">Europe/Paris</span>
+                        <span class=\"title\">Réservation Appartement 669 à Lacanau Océan</span>
+                        <span class=\"description\">Réservation Appartement 669, Résidence Océanide, Lacanau-Océan ($people personnes)</span>
+                        <span class=\"location\">Residence Oceanides, Rés Front de Mer, 33680 Lacanau, France</span>
                     </div>
                 </div>";
                 }
@@ -256,6 +270,8 @@ function printMessage($info){
                     break;
                 case "wrongLogin": echo "Nom d'utilisateur ou mot de passe incorrect";
                     break;
+                case "wrongAccess": echo "Vous n'avez pas les droits pour accéder à cette page";
+                    break;
                 case "globalErrorBooking": echo "Oops, petit problème de création de la réservation, veuillez réessayer";
                     break;
                 case "globalErrorDisplayBooking": echo "Oops, problème de récupération des réservations";
@@ -272,7 +288,7 @@ function printMessage($info){
                     break;
                 case "booked" : echo "Ces dates sont déja réservées, veuillez réserver d'autres dates";
                     break;
-                case "bookingSuccess" : echo "Votre séjour à Lacanau, Résidence Océanide, Appartement 669, à bien été réservé";
+                case "bookingSuccess" : echo "Votre demande de réservation a bien été prise en compte, en attente d'approbation par un admin...";
                     break;
                 default: echo "Erreur dans le formulaire";
                     break;

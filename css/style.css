@@ -164,6 +164,18 @@ body{
     margin-bottom: 2px;
 }
 
+.booking-manage{
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    margin-right: 20px;
+}
+
 .inner-profile-ctn img{
     width: 1.2em;
 }
@@ -306,7 +318,7 @@ body{
 
 .booking-card{
   position: relative;
-  margin-top: 20px;
+  margin-top: 40px; /* -- Position absolute status -- */
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
@@ -320,6 +332,7 @@ body{
 .card-info-people{
   background-color: #6a6a6a;
   display: flex;
+  border: 5px solid transparent;
   justify-content: center;
   flex-direction: column;
   padding: 10px 20px;
@@ -466,6 +479,22 @@ body{
 
 .delete-booking img{
     width: 1.5em;
+}
+
+.status{
+    border-radius:5px;
+    position: absolute;
+    text-transform: uppercase;
+    background-color: rgb(233, 130, 3);
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    top: -60px;
+    left:0;
+    right:0;
+    margin: auto;
+    width: 40%;
+    height: 40px;
 }
 
 @media screen and (min-height: 1200px) {

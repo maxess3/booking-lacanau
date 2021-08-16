@@ -53,9 +53,16 @@ session_start();
                         if(empty($_SESSION)){
                             echo '<div class="profile-ctn">
                                     <div class="inner-profile-ctn">
-                                        <img src="assets/img/user.svg" alt="Utilisateur connecté">
+                                        <img src="assets/img/user.svg" alt="Se connecter">
                                     </div>
                                 </div>';
+                        } else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+                            echo '<div class="logout-ctn">
+                            <div class="inner-profile-ctn">
+                                <a href="admin.php"><span class="booking-manage"><img src="assets/img/pencil.svg" alt="Accueil réservation"></span></a>
+                                <a href="logout.php">Se déconnecter</a>
+                            </div>
+                        </div>';
                         } else {
                             echo '<div class="logout-ctn">
                             <div class="inner-profile-ctn">
