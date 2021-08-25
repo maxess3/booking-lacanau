@@ -20,39 +20,26 @@ session_start();
 <body>
     <table>
         <caption><span class="backToIndex"><img src="assets/img/arrow-left.svg" alt="Revenir à la page d'accueil"></span>Gérer les réservations</caption>
+        <thead>
+        <tr>
+          <th scope=col>Nom</th>
+          <th scope=col>Prénom</th>
+          <th scope=col>Nom d'utilisateur</th>
+          <th scope=col>Jour d'arrivée</th>
+          <th scope=col>Jour de départ</th>
+          <th scope=col>Créé le</th>
+          <th scope=col>Statut</th>
+        </tr>
+        <tbody>
 <?php 
-
-if($_SESSION["admin"] && $_SESSION["admin"] == 1){
-    echo "
-    <thead>
-      <tr>
-        <th scope=\"col\">Nom</th>
-        <th scope=\"col\">Prénom</th>
-        <th scope=\"col\">Nom d'utilisateur</th>
-        <th scope=\"col\">Jour d'arrivée</th>
-        <th scope=\"col\">Jour de départ</th>
-        <th scope=\"col\">Créé le</th>
-        <th scope=\"col\">Statut</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label=\"Lastname\">Schellenberger</td>
-        <td data-label=\"Firstname\">Maxime</td>
-        <td data-label=\"Username\">@maxess</td>
-        <td data-label=\"DateCheckIn\">03/01/2016</td>
-        <td data-label=\"DateCheckOut\">03/01/2016</td>
-        <td data-label=\"Created\">03/01/2016 15:00</td>
-        <td data-label=\"Status\" class=\"status\">Validé<span class=\"modify\"><img src=\"assets/img/pencil.svg\" alt=\"Modifier une réservation\"></span></td>
-      </tr>
-    </tbody>
-  </table>";
-} else {
-    header("Location: " . "index.php?error=wrongAccess");
-}
-
+        if($_SESSION["admin"] && $_SESSION["admin"] == 1){
+            getBookingAdmin();
+        } else {
+            header("Location: " . "index.php?error=wrongAccess");
+        }
 ?>
-
+      </tbody>
+    </table>
 <script src="js/admin.js"></script>
 </body>
 </html>

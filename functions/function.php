@@ -256,6 +256,49 @@ function notBooked($dateCheckIn,$dateCheckOut){
     }
 }
 
+function getBookingAdmin(){
+    $db = connectDB();
+    try {
+       $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, username, firstname, lastname 
+       FROM Book b 
+       INNER JOIN Appartment a 
+       ON b.id_appartment = a.id 
+       INNER JOIN User u 
+       ON b.id_user = u.id
+       WHERE NOW() < a.date_checkout
+       ORDER BY a.date_checkout ASC";
+       $stmt = $db->query($sql);
+       // Display bookings cards
+       if($stmt->rowCount() > 0){
+            while($row = $stmt->fetch()){
+                $idAppartment = $row['id'];
+                $dateCheckIn = $row['date_checkin'];
+                $dateCheckInFR = getDateFR($dateCheckIn);
+                $dateCheckOut = $row['date_checkout'];
+                $dateCheckOutFR = getDateFR($dateCheckOut);
+                $firstname = $row['firstname'];
+                $lastname = $row['lastname'];
+                $username = $row['username'];
+                echo "
+                <tr data-appartment=\"$idAppartment\">
+                    <td data-label=\"Lastname\">$lastname</td>
+                    <td data-label=\"Firstname\">$firstname</td>
+                    <td data-label=\"Username\">$username</td>
+                    <td data-label=\"DateCheckIn\">$dateCheckInFR</td>
+                    <td data-label=\"DateCheckOut\">$dateCheckOutFR</td>
+                    <td data-label=\"Created\">03/01/2016 15:00</td>
+                    <td data-label=\"Status\" class=\"status\"><span><img src=\"assets/img/valid.png\" alt=\"Accepter la réservation\" class=\"accepted modify\"></span><span><img src=\"assets/img/pending.svg\" alt=\"Mettre en attente\" class=\"pending modify\"></span><span><img src=\"assets/img/rejected.svg\" style=\"width:17px!important;position:relative;top:3px;\" alt=\"Annuler la réservation\" class=\"rejected modify\"></span></td>
+              </tr>";
+            }
+        }
+        $stmt->closeCursor();
+    } catch(Exception $e) {
+        sleep(1);
+        header("Location: " . "index.php?error=globalErrorDisplayBooking");
+        throw new Exception("Registration error" . $e->getMessage(), 1);
+    }
+}
+
 function printMessage($info){
     if(isset($info)){
         if(!empty($info)){
