@@ -126,15 +126,18 @@ table {
   left: 50%;
 }
 
-.inner-update{
-  width: 100%;
-  background-color: purple;
+.listPending,.listAccepted,.listRejected{
+  border-bottom: 2px solid rgb(55, 55, 55);
 }
 
-.inner-update span{
-  display: flex;
-  width: 20px;
-  height: 20px;
+.listPending{
+  background-color: orange;
+}
+
+.listAccepted{
   background-color: green;
-  margin: 0 20px;
+}
+
+.listRejected{
+  background-color: rgb(179, 44, 44);
 }

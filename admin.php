@@ -18,6 +18,10 @@ session_start();
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
+    <div style="display: none;" class="message-ajax">
+            <p class="content-message-ajax"></p>
+            <img src="assets/img/valid.png" alt="Message de succès" class="info-icon">
+    </div>
     <table>
         <caption><span class="backToIndex"><img src="assets/img/arrow-left.svg" alt="Revenir à la page d'accueil"></span>Gérer les réservations</caption>
         <thead>
@@ -33,7 +37,18 @@ session_start();
         <tbody>
 <?php 
         if($_SESSION["admin"] && $_SESSION["admin"] == 1){
-            getBookingAdmin();
+            echo "<tr>
+                <td colspan=\"7\" class=\"listPending\">En attente</td>
+            </tr>";
+            getBookingAdmin(0);
+            echo "<tr>
+                <td colspan=\"7\" class=\"listAccepted\">Validé</td>
+            </tr>";
+            getBookingAdmin(1);
+            echo "<tr>
+                <td colspan=\"7\" class=\"listRejected\">Refusé</td>
+            </tr>";
+            getBookingAdmin(2);
         } else {
             header("Location: " . "index.php?error=wrongAccess");
         }

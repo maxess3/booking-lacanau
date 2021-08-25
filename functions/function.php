@@ -121,16 +121,48 @@ function deleteBooking($idAppartment){
     }
 }
 
-function getBooking($sessionUsername){
+function updateStatusBooking($status,$idAppt){
     $db = connectDB();
     try {
-       $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, username, firstname, lastname 
+       $sql = "UPDATE Appartment a SET a.status = ? WHERE a.id = ?";
+       $stmt = $db->prepare($sql);
+       $stmt->execute(array($status,$idAppt));
+       $stmt->closeCursor();
+    } catch (Exception $e) {
+        sleep(1);
+        header("Location: " . "../index.php?error=globalErrorBooking");
+        throw new Exception("Registration error" . $e->getMessage(), 1);
+    }
+}
+
+function getBooking($sessionUsername,$status){
+    switch ($status) {
+        case 0:
+            $statusTitle = "En attente";
+            $statusClass = "pending";
+            break;
+        case 1:
+            $statusTitle = "Approuvé";
+            $statusClass = "accepted";
+            break;
+        case 2:
+            $statusTitle = "Refusé";
+            $statusClass = "rejected";
+            break;
+        default:
+            $statusTitle = "Erreur";
+            break;
+    }
+    $db = connectDB();
+    try {
+       $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, status, username, firstname, lastname 
        FROM Book b 
        INNER JOIN Appartment a 
        ON b.id_appartment = a.id 
        INNER JOIN User u 
        ON b.id_user = u.id
        WHERE NOW() < a.date_checkout
+       AND a.status = $status
        ORDER BY a.date_checkout ASC";
        $stmt = $db->query($sql);
        // Display bookings cards
@@ -149,6 +181,7 @@ function getBooking($sessionUsername){
                 $hourCalendarCheckInFR = date('G:i', strtotime($hourCheckIn));
                 $hourCheckOut = $row['hour_checkout'];
                 $hourCheckOutFR = getTimeFR($hourCheckOut);
+                $status = $row['status'];
                 $hourCalendarCheckOutFR = date('G:i', strtotime($hourCheckOut));
                 $firstname = $row['firstname'];
                 $lastname = $row['lastname'];
@@ -156,7 +189,7 @@ function getBooking($sessionUsername){
                 // Display personnal bookings cards
                 if($sessionUsername != false && ($sessionUsername == $username)){
                     echo "<div class=\"booking-card\">
-                    <div class=\"status\">En attente</div>
+                    <div class=\"status $statusClass\">$statusTitle</div>
                     <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                         <div class=\"card-info-people unique-card-color\">
                             <span>$firstname $lastname</span>
@@ -188,7 +221,7 @@ function getBooking($sessionUsername){
                     </div>";
                 } else {
                     echo "<div class=\"booking-card\">
-                    <div class=\"status\">En attente</div>
+                    <div class=\"status $statusClass\">$statusTitle</div>
                     <div class=\"card-info-people\">
                         <span>$firstname $lastname</span>
                         <span>@$username</span>
@@ -219,13 +252,27 @@ function getBooking($sessionUsername){
                 </div>";
                 }
             }
-       } else {
-           echo "<div class=\"no-booking\">
+       } else if($status == 0) {
+        echo "<div class=\"no-booking\">
            <div>
                <img src=\"assets/img/no-booking.svg\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
            </div>
-           <p>Il n'y a pas de réservation pour le moment</p>
-       </div>";
+           <p>Il n'y a pas de réservation en attente pour le moment</p>
+        </div>";
+       } else if($status == 1){
+        echo "<div class=\"no-booking\">
+            <div>
+                <img src=\"assets/img/no-booking.svg\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
+            </div>
+            <p>Il n'y a pas de réservation approuvée pour le moment</p>
+        </div>";
+       } else {
+        echo "<div class=\"no-booking\">
+        <div>
+            <img src=\"assets/img/no-booking.svg\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
+        </div>
+        <p>Il n'y a pas de réservation annulée pour le moment</p>
+        </div>";
        }
        $stmt->closeCursor();
     } catch (Exception $e) {
@@ -256,16 +303,17 @@ function notBooked($dateCheckIn,$dateCheckOut){
     }
 }
 
-function getBookingAdmin(){
+function getBookingAdmin($status){
     $db = connectDB();
     try {
-       $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, username, firstname, lastname 
+       $sql = "SELECT a.id, people, date_checkin, date_checkout, status, username, firstname, lastname 
        FROM Book b 
        INNER JOIN Appartment a 
        ON b.id_appartment = a.id 
        INNER JOIN User u 
        ON b.id_user = u.id
        WHERE NOW() < a.date_checkout
+       AND a.status = $status
        ORDER BY a.date_checkout ASC";
        $stmt = $db->query($sql);
        // Display bookings cards

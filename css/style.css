@@ -16,6 +16,7 @@ html{
 
 body{
     overflow-x: hidden;
+    background-color: rgb(34, 34, 34);
 }
 
 button, input[type="button"]{
@@ -318,9 +319,10 @@ body{
 
 .booking-card{
   position: relative;
-  margin-top: 40px; /* -- Position absolute status -- */
+  margin-top: 90px; /* -- Position absolute status -- */
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   width: 380px;
@@ -435,7 +437,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: auto;
+    margin: 50px auto;
     padding: 20px 50px;
     -webkit-box-shadow: 8px 8px 20px 7px rgba(0,0,0,0.15); 
     box-shadow: 8px 8px 20px 7px rgba(0,0,0,0.15);  
@@ -482,19 +484,55 @@ body{
 }
 
 .status{
-    border-radius:5px;
     position: absolute;
-    text-transform: uppercase;
+    border-radius: 10px 10px 0px 0px;
     background-color: rgb(233, 130, 3);
     display: flex;
     justify-content: center;
     align-items: center ;
-    top: -60px;
     left:0;
     right:0;
-    margin: auto;
-    width: 40%;
     height: 40px;
+    width: 40%;
+    top: -40px;
+    margin: auto;
+}
+
+.accepted{
+    background-color: rgb(11, 106, 11);
+}
+
+.rejected{
+    background-color: rgb(211, 41, 41);
+}
+
+.info-booking-status{
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+    background-color: rgb(50, 50, 50);
+}
+
+.status-green{
+    border-bottom: 10px solid green;
+}
+
+.status-orange{
+    border-bottom: 10px solid rgb(233, 130, 3);
+}
+
+.status-red{
+    border-bottom: 10px solid rgb(211, 41, 41);
+}
+
+.info-booking-status span{
+    font-weight: bold;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.status-green span{
 }
 
 @media screen and (min-height: 1200px) {

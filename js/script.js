@@ -35,7 +35,6 @@ function fetchDeleteBooking(id,deleteElement){
 
     xhr.onload = function(){
     const serverResponse = this.responseText;
-    console.log(serverResponse);
     const messageSuccess = document.querySelector(".message-ajax");
     const contentMessage = document.querySelector(".content-message-ajax");
     const infoIcon = document.querySelector(".info-icon");
