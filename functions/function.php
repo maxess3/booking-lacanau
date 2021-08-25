@@ -255,21 +255,21 @@ function getBooking($sessionUsername,$status){
        } else if($status == 0) {
         echo "<div class=\"no-booking\">
            <div>
-               <img src=\"assets/img/no-booking.svg\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
+               <img src=\"assets/img/error.png\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
            </div>
            <p>Il n'y a pas de réservation en attente pour le moment</p>
         </div>";
        } else if($status == 1){
         echo "<div class=\"no-booking\">
             <div>
-                <img src=\"assets/img/no-booking.svg\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
+                <img src=\"assets/img/error.png\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
             </div>
             <p>Il n'y a pas de réservation approuvée pour le moment</p>
         </div>";
        } else {
         echo "<div class=\"no-booking\">
         <div>
-            <img src=\"assets/img/no-booking.svg\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
+            <img src=\"assets/img/error.png\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
         </div>
         <p>Il n'y a pas de réservation annulée pour le moment</p>
         </div>";

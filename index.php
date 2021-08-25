@@ -119,7 +119,7 @@ session_start();
         </main>
         <div id="list-booking-ctn">
             <div class="list-booking-inner">
-                <div class="info-booking-status status-green"><span>Réservations validées :</span></div>
+                <div class="info-booking-status status-green"><span>Réservations approuvées :</span></div>
                 <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],1) : getBooking(false,1); ?>
                 <div class="info-booking-status status-orange" id="pending-list"><span>Réservations mises en attente :</span></div>
                 <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],0) : getBooking(false,0); ?>

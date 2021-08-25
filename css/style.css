@@ -173,7 +173,7 @@ body{
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: red;
+    background-color: rgb(211, 41, 41);
     margin-right: 20px;
 }
 
@@ -319,10 +319,10 @@ body{
 
 .booking-card{
   position: relative;
-  margin-top: 90px; /* -- Position absolute status -- */
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 50px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   width: 380px;
@@ -437,7 +437,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 50px auto;
+    margin: 20px auto;
     padding: 20px 50px;
     -webkit-box-shadow: 8px 8px 20px 7px rgba(0,0,0,0.15); 
     box-shadow: 8px 8px 20px 7px rgba(0,0,0,0.15);  
@@ -509,6 +509,8 @@ body{
 .info-booking-status{
     width: 100%;
     padding: 10px 0;
+    margin-bottom: 20px;
+    margin-top: 20px;
     border-radius: 10px;
     text-align: center;
     background-color: rgb(50, 50, 50);
