@@ -90,11 +90,11 @@ session_start();
                             </div>     
                             <div>
                                 <label for="date-checkin">Jour d'arrivée :</label>
-                                <input type="date" id="date-checkin" name="date-checkin">
+                                <input type="date" id="date-checkin" name="date-checkin" value="<?= date('Y-m-d') ?>">
                             </div>
                             <div>
                                 <label for="hour-checkin">Heure d'arrivée :</label>
-                                <input type="time" id="hour-checkin" name="hour-checkin">
+                                <input type="time" id="hour-checkin" name="hour-checkin" value="12:00">
                             </div>
                             <div>
                                 <label for="date-checkout">Jour de départ :</label>
@@ -102,7 +102,7 @@ session_start();
                             </div>
                             <div>           
                                 <label for="hour-checkout">Heure du départ :</label>
-                                <input type="time" id="hour-checkout" name="hour-checkout">
+                                <input type="time" id="hour-checkout" name="hour-checkout" value="12:00">
                             </div>
                             <div class="btn-booking">           
                                 <button type="submit" id="submit-booking" value="Réserver">Réserver</button>

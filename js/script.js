@@ -6,8 +6,9 @@ if(profile != undefined || profile != null){
 };
 
 const bookingSuccess = document.querySelector(".booking-success");
-if(bookingSuccess != undefined || bookingSuccess != null){
-    scrollBottom();
+const sectionPendingList = document.getElementById("pending-list");
+if(bookingSuccess != undefined || bookingSuccess != null && sectionPendingList != undefined && sectionPendingList != null){
+    scrollToPendingList(sectionPendingList);
 }
 
 const deleteBooking = document.getElementsByClassName("delete-booking");
@@ -68,6 +69,6 @@ function fetchDeleteBooking(id,deleteElement){
    xhr.send(`deleteBooking=${id}`);
 }
 
-function scrollBottom(){
-    window.scrollTo(0,document.body.scrollHeight);
+function scrollToPendingList(element){
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' })
 }

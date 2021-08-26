@@ -321,7 +321,7 @@ body{
   position: relative;
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   margin-top: 60px;
   display: flex;
   flex-direction: column;
@@ -491,7 +491,7 @@ body{
     justify-content: center;
     align-items: center ;
     left:0;
-    right:0;
+    right: 30px;
     height: 40px;
     width: 40%;
     top: -40px;
@@ -534,7 +534,30 @@ body{
     text-transform: uppercase;
 }
 
-.status-green span{
+.update-time-status{
+    border-radius: 0px 10px 0px 0px;
+    background-color: rgb(30, 179, 20);
+    display: inline-flex;
+    justify-content: center;        
+    align-items: center;
+    padding: 5px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    position: absolute;
+    right: -30px;
+    height: 100%;
+}
+
+.icon{
+    width: 8px;
+}
+
+.red-status{
+    background-color: rgb(238, 10, 10);
+}
+
+.orange-status{
+    background-color: orange;
 }
 
 @media screen and (min-height: 1200px) {
@@ -649,5 +672,11 @@ body{
         width: 100%;
         margin: 0px auto;
         padding: 10px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .status{
+        width: 50%;
     }
 }
