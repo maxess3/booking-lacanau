@@ -31,6 +31,14 @@ if(deleteBooking != undefined || deleteBooking != null){
     }
 }
 
+const getInfoStatusBtn = document.querySelectorAll(".update-time-status");
+const msgStatus = document.querySelectorAll(".status-msg");
+for (let i = 0; i < getInfoStatusBtn.length; i++) {
+    getInfoStatusBtn[i].addEventListener("click", (e) => {
+        msgStatus[i].classList.toggle("info-toggle");
+    });
+}
+
 function fetchDeleteBooking(id,deleteElement){
    const xhr = new XMLHttpRequest();
 

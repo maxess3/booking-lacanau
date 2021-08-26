@@ -124,7 +124,10 @@ function deleteBooking($idAppartment){
 function updateStatusBooking($status,$idAppt){
     $db = connectDB();
     try {
-       $sql = "UPDATE Appartment a SET a.status = ? WHERE a.id = ?";
+       $sql = "UPDATE Appartment a 
+       SET a.status = ?, 
+       a.updated_at = NOW() 
+       WHERE a.id = ?";
        $stmt = $db->prepare($sql);
        $stmt->execute(array($status,$idAppt));
        $stmt->closeCursor();
@@ -155,7 +158,7 @@ function getBooking($sessionUsername,$status){
     }
     $db = connectDB();
     try {
-       $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, status, username, firstname, lastname 
+       $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, updated_at, status, username, firstname, lastname 
        FROM Book b 
        INNER JOIN Appartment a 
        ON b.id_appartment = a.id 
@@ -181,6 +184,9 @@ function getBooking($sessionUsername,$status){
                 $hourCalendarCheckInFR = date('G:i', strtotime($hourCheckIn));
                 $hourCheckOut = $row['hour_checkout'];
                 $hourCheckOutFR = getTimeFR($hourCheckOut);
+                $updatedAt = $row['updated_at'];
+                $updatedAtFR = getDateFR($updatedAt);
+                $updatedAtTime = getTimeFR($updatedAt);
                 $status = $row['status'];
                 $hourCalendarCheckOutFR = date('G:i', strtotime($hourCheckOut));
                 $firstname = $row['firstname'];
@@ -190,6 +196,7 @@ function getBooking($sessionUsername,$status){
                 if($sessionUsername != false && ($sessionUsername == $username)){
                     if($status == "0"){
                         echo "<div class=\"booking-card\">
+                        <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                         <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status orange-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
                         <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                             <div class=\"card-info-people unique-card-color\">
@@ -222,6 +229,7 @@ function getBooking($sessionUsername,$status){
                         </div>";
                     } else if($status == "1") {
                         echo "<div class=\"booking-card\">
+                        <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                         <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
                         <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                             <div class=\"card-info-people unique-card-color\">
@@ -254,6 +262,7 @@ function getBooking($sessionUsername,$status){
                         </div>";
                     } else {
                         echo "<div class=\"booking-card\">
+                        <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                         <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status red-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
                         <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                             <div class=\"card-info-people unique-card-color\">
@@ -278,6 +287,7 @@ function getBooking($sessionUsername,$status){
                     }
                 } else if($status == "0") {
                     echo "<div class=\"booking-card\">
+                    <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                     <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status orange-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
                     <div class=\"card-info-people\">
                         <span>$firstname $lastname</span>
@@ -308,6 +318,7 @@ function getBooking($sessionUsername,$status){
                 </div>";
                 } else if($status == "1") {
                     echo "<div class=\"booking-card\">
+                    <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                     <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
                     <div class=\"card-info-people\">
                         <span>$firstname $lastname</span>
@@ -338,6 +349,7 @@ function getBooking($sessionUsername,$status){
                 </div>";
                 } else {
                     echo "<div class=\"booking-card\">
+                    <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                     <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status red-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
                     <div class=\"card-info-people\">
                         <span>$firstname $lastname</span>

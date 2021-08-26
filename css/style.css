@@ -331,6 +331,35 @@ body{
   padding: 20px;
 }
 
+.status-msg{
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 10px;
+    border-radius: 10px;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(34, 34, 34);
+    border: 10px solid rgb(67, 67, 67);
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.info-toggle{
+    display: flex;
+    animation: blob 0.2s ease;
+}
+
+.bold-status{
+    font-weight: bold;
+}
+
 .card-info-people{
   background-color: #6a6a6a;
   display: flex;
@@ -459,6 +488,7 @@ body{
 
 .delete-booking{
     cursor: pointer;
+    z-index: 2000;
     display: flex;
     justify-content: center;
     align-items: center;
