@@ -4,8 +4,13 @@ function connectDB(){
     $servername = "localhost:8889";
     $username = "root";
     $password = "root";
+    $dbname = "booking";
+    // $servername = "localhost";
+    // $username = "olym5493_maxime";
+    // $password = "i+NJRvB.fgWS";
+    // $dbname = "olym5493_booking";
     try {
-        $db = new PDO("mysql:host=$servername;dbname=booking", $username, $password);
+        $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $db;
       } catch(PDOException $e) {

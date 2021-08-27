@@ -20,7 +20,6 @@ for(let i = 0; i < btnModify.length; i++) {
         } else {
             console.log("problème...");
         }
-        document.location.reload();
     });
 };
 
@@ -32,6 +31,7 @@ function fetchUpdateBooking(status,idAppt){
             if (xhr.status === 200) {
                 console.log("validé");
                 console.log(serverResponse);
+                document.location.reload();
             } else {
                 console.log("probleme");
             }
