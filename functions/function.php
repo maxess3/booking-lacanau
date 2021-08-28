@@ -18,8 +18,15 @@ function connectDB(){
       }
 }
 
-function checkEmptyFormLogin($firstname,$password){
-    if(empty($firstname) || empty($password)){
+function checkEmptyFormLogin($username,$password){
+    if(empty($username) && empty($password)){
+        $_GET["error"] = "blank";
+        return false;
+    } else if(empty($username)){
+        $_GET["error"] = "emptyUsername";
+        return false;
+    } else if(empty($password)){
+        $_GET["error"] = "emptyPassword";
         return false;
     } else {
         return true;
@@ -64,13 +71,15 @@ function login($username,$password){
                     $_SESSION["lastname"] = $row["lastname"];
                     $_SESSION["password"] = $row["password"];
                     $_SESSION["admin"] = $row["admin"];
-                    header("Location: " . "../index.php");
+                    header("Location: " . "index.php");
                 } else {
-                    header("Location: " . "../login.php?error=wrongLogin");
+                    $_GET["error"] = "wrongLogin";
+                    // header("Location: " . "../login.php?error=wrongLogin");
                 }
             }
         } else {
-            header("Location: " . "../login.php?error=wrongLogin");
+            $_GET["error"] = "wrongLogin";
+            // header("Location: " . "../login.php?error=wrongLogin");
         }
         $stmt->closeCursor();
     } catch (Exception $e) {
@@ -482,6 +491,10 @@ function printMessage($info){
                 case "notConnected": echo "Connectez-vous ou inscrivez-vous pour pouvoir réserver";
                     break;
                 case "valid": echo "Inscription validée, connectez-vous à présent";
+                    break;
+                case "emptyUsername": echo "Veuillez renseigner un nom d'utilisateur";
+                    break;
+                case "emptyPassword": echo "Veuillez renseigner un mot de passe";
                     break;
                 case "wrongLogin": echo "Nom d'utilisateur ou mot de passe incorrect";
                     break;

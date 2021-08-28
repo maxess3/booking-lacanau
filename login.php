@@ -2,6 +2,18 @@
 
 require_once("functions/function.php"); 
 
+if(isset($_POST['submit'])){
+    if(isset($_POST['username-login']) && isset($_POST['password-login'])){
+      $usernameLogin = $_POST['username-login'];
+      $passwordLogin = $_POST['password-login'];
+          if(checkEmptyFormLogin($usernameLogin,$passwordLogin)){
+              login($usernameLogin,$passwordLogin);
+          }
+    } else {
+        $_GET["error"] = "error";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,10 +42,10 @@ require_once("functions/function.php");
           <a href="login.php"><h2 class="active"> Se connecter</h2></a> 
           <a href="register.php"><h2 class="inactive underlineHover">S'inscrire</h2></a>
           <!-- Login Form -->
-          <form method="POST" action="functions/functionLogin.php">
-          <input type="text" id="username-login" name="username-login" placeholder="nom d'utilisateur" autocomplete="off" class="<?php if((isset($_GET["error"]))){ echo 'error';} ?>" >
-          <input type="password" id="password-login" name="password-login" placeholder="mot de passe" autocomplete="off" class="<?php if((isset($_GET["error"]))){ echo 'error';} ?>">
-          <input type="submit" class="fadeIn fourth" value="Se connecter">
+          <form method="POST" action="login.php">
+          <input type="text" id="username-login" name="username-login" placeholder="nom d'utilisateur" autocomplete="on" class="<?php if(isset($_GET["error"]) && ($_GET["error"] == "emptyUsername" || $_GET["error"] == "blank" || $_GET["error"] == "wrongLogin")){ echo 'error';} ?>" value="<?php if(isset($usernameLogin)){ echo $usernameLogin; } ?>" >
+          <input type="password" id="password-login" name="password-login" placeholder="mot de passe" autocomplete="off" class="<?php if(isset($_GET["error"]) && ($_GET["error"] == "emptyPassword" || $_GET["error"] == "blank" || $_GET["error"] == "wrongLogin")){ echo 'error';}  ?>" value="<?php if(isset($passwordLogin)){ echo $passwordLogin; } ?>">
+          <input type="submit" class="fadeIn fourth" value="Se connecter" name="submit">
           </form>
           <!-- Remind Passowrd -->
           <div id="formFooter">
