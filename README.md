@@ -1,6 +1,6 @@
 # booking-lacanau
 
-### Principe de fonctionnement :
+## Principe de fonctionnement :
 
     * Chaque utilisateur connecté peut réserver une ou plusieurs réservations. Les réservations demandées par l’utilisateur sont placées automatiquement sous le statut suivant : « en attente d’approbation par un administrateur »
     
