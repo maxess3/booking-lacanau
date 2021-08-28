@@ -14,10 +14,8 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['user
             header("Location: " . "../login.php?register=valid");
         } else {
             header("Location: " . "../register.php?error=blank");
+            $firstnameRegister = "iji";
         }
 } else {
     header("Location: " . "../register.php?error=blank");
 }
-
-// strtoupper(substr(strtolower($_SESSION['firstname']),0,1)) . substr($_SESSION['firstname'],1)
-

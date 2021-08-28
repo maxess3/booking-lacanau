@@ -652,6 +652,16 @@ body{
     .view-booking-inner{
         position: unset;
         margin-top: 40px;
+        padding: 30px 10px 0px 10px;
+    }
+
+    .view-booking-inner a, .view-booking-inner input{
+        width: 100%;
+    }
+
+    .view-booking-inner input{
+        padding: 20px;
+        font-size: 1.2em;
     }
 
     .inner-form{
@@ -705,8 +715,16 @@ body{
     }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 390px) {
     .status{
         width: 50%;
+    }
+
+    .info-booking-status{
+        padding: 15px 0;
+    }
+
+    .info-booking-status span{
+        font-size: 1em;
     }
 }
