@@ -35,7 +35,7 @@ require_once("functions/function.php");
         </form>
         <!-- Remind Passowrd -->
         <div id="formFooter">
-        <a href="index.php"><input type="button" class="leave" value="Quitter"></a> 
+            <a href="index.php"><input type="button" class="leave" value="Quitter"></a> 
         </div>
     </div>
 </div>

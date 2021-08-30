@@ -43,8 +43,8 @@ if(isset($_POST['submit'])){
           <a href="register.php"><h2 class="inactive underlineHover">S'inscrire</h2></a>
           <!-- Login Form -->
           <form method="POST" action="login.php">
-          <input type="text" id="username-login" name="username-login" placeholder="nom d'utilisateur" autocomplete="on" class="<?php if(isset($_GET["error"]) && ($_GET["error"] == "emptyUsername" || $_GET["error"] == "blank" || $_GET["error"] == "wrongLogin")){ echo 'error';} ?>" value="<?php if(isset($usernameLogin)){ echo $usernameLogin; } ?>" >
-          <input type="password" id="password-login" name="password-login" placeholder="mot de passe" autocomplete="off" class="<?php if(isset($_GET["error"]) && ($_GET["error"] == "emptyPassword" || $_GET["error"] == "blank" || $_GET["error"] == "wrongLogin")){ echo 'error';}  ?>" value="<?php if(isset($passwordLogin)){ echo $passwordLogin; } ?>">
+          <input type="text" id="username-login" name="username-login" placeholder="nom d'utilisateur" autocomplete="on" class="<?php if(isset($_GET["error"]) && ($_GET["error"] == "emptyUsername" || $_GET["error"] == "blank" || $_GET["error"] == "wrongLogin")){ echo 'error';} ?>" value="<?php if(isset($usernameLogin)){ echo $usernameLogin; } ?>" data-focus-username = "<?php if(isset($_GET["error"]) && ($_GET["error"] == "emptyUsername")){ echo "true";}?>">
+          <input type="password" id="password-login" name="password-login" placeholder="mot de passe" autocomplete="off" class="<?php if(isset($_GET["error"]) && ($_GET["error"] == "emptyPassword" || $_GET["error"] == "blank" || $_GET["error"] == "wrongLogin")){ echo 'error';}  ?>" value="<?php if(isset($passwordLogin)){ echo $passwordLogin; } ?>" data-focus-password = "<?php if(isset($_GET["error"]) && ($_GET["error"] == "emptyPassword")){ echo "true";}?>">
           <input type="submit" class="fadeIn fourth" value="Se connecter" name="submit">
           </form>
           <!-- Remind Passowrd -->
@@ -53,5 +53,7 @@ if(isset($_POST['submit'])){
           </div>
       </div>
     </div>
+
+    <script src="js/login.js"></script>
 </body>
 </html>

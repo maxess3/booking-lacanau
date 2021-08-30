@@ -29,6 +29,10 @@ table {
     border: 1px solid #ddd;
     padding: .35em;
   }
+
+  table tr:nth-child(even){
+    background-color: rgb(233, 233, 233);
+  }
   
   table th,
   table td {
