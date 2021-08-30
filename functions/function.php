@@ -34,8 +34,16 @@ function checkEmptyFormLogin($username,$password){
 }
 
 function checkEmptyFormRegister($firstname,$lastname,$username,$password){
-    if(empty($firstname) || empty($lastname) || empty($username) || empty($password)){
-        return false;
+    if(empty($firstname) && empty($lastname) && empty($username) && empty($password)){
+        $_GET["error"] = "";
+    } else if(empty($firstname)){
+        echo "test";
+    } else if(empty($lastname)){
+        
+    } else if(empty($username)){
+
+    } else if(empty($password)){
+
     } else {
         return true;
     }
