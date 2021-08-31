@@ -34,19 +34,22 @@ function checkEmptyFormLogin($username,$password){
 }
 
 function checkEmptyFormRegister($firstname,$lastname,$username,$password){
-    if(empty($firstname) && empty($lastname) && empty($username) && empty($password)){
-        $_GET["error"] = "";
-    } else if(empty($firstname)){
-        echo "test";
-    } else if(empty($lastname)){
-        
-    } else if(empty($username)){
+    $args = func_get_args();
+    $count = 0;
 
-    } else if(empty($password)){
-
-    } else {
-        return true;
+    for ($i=0; $i < count($args); $i++) { 
+        if(empty($args[$i])){
+            $count = $count + 1;
+            $_GET["input$i"] = "error";
+        }
     }
+    
+    if($count > 0){
+        $_GET["error"] = "blank";
+        return false;
+    }
+
+    return true;
 }
 
 function checkEmptyFormBooking($people,$dateCheckIn,$hourCheckIn,$dateCheckOut,$hourCheckOut){

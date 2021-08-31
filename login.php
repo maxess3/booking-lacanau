@@ -4,8 +4,8 @@ require_once("functions/function.php");
 
 if(isset($_POST['submit'])){
     if(isset($_POST['username-login']) && isset($_POST['password-login'])){
-      $usernameLogin = $_POST['username-login'];
-      $passwordLogin = $_POST['password-login'];
+      $usernameLogin = htmlspecialchars($_POST['username-login']);
+      $passwordLogin = htmlspecialchars($_POST['password-login']);
           if(checkEmptyFormLogin($usernameLogin,$passwordLogin)){
               login($usernameLogin,$passwordLogin);
           }
