@@ -1,7 +1,7 @@
 <?php 
 
 require_once("functions/function.php");
- 
+
 session_start(); 
 
 ?>
