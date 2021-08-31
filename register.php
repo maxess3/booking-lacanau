@@ -56,6 +56,8 @@ if(isset($_POST['submit'])){
         </div>
     </div>
 </div>
+
+<script src="js/error.js"></script>
 </body>
 </html>
 

@@ -54,6 +54,6 @@ if(isset($_POST['submit'])){
       </div>
     </div>
 
-    <script src="js/login.js"></script>
+    <script src="js/error.js"></script>
 </body>
 </html>
