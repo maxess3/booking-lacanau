@@ -2,6 +2,23 @@
 
 require_once("functions/function.php"); 
 
+if(isset($_POST['submit'])){
+    if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username-register']) && isset($_POST['password-register'])){
+        $firstnameRegister = htmlspecialchars($_POST['firstname']);
+        $lastnameRegister = htmlspecialchars($_POST['lastname']);
+        $usernameRegister = htmlspecialchars($_POST['username-register']);
+        $passwordRegister = htmlspecialchars($_POST['password-register']);
+        if(checkEmptyFormRegister($firstnameRegister,$lastnameRegister,$usernameRegister,$passwordRegister)){
+            $firstnameRegister = strtoupper(substr($firstnameRegister,0,1)) . strtolower(substr($firstnameRegister,1));
+            $lastnameRegister = strtoupper(substr($lastnameRegister,0,1)) . strtolower(substr($lastnameRegister,1));
+            insertUser($usernameRegister,$firstnameRegister,$lastnameRegister,$passwordRegister);
+            header("Location: " . "login.php?register=valid");
+        }
+    } else {
+        $_GET["error"] = "error";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +33,7 @@ require_once("functions/function.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div style="display: none;" class="<?= isset($_GET["error"]) ? "info-message" : ""?>">
+<div style="display: none;" class="<?= isset($_GET["error"])  ? "info-message" : ""?>">
     <p><?php isset($_GET["error"]) ? printMessage($_GET["error"]) : "" ?></p>
     <img src="assets/img/error.png" alt="Message d'erreur" class="info-icon">
 </div>
@@ -26,12 +43,12 @@ require_once("functions/function.php");
         <a href="login.php"><h2 class="inactive underlineHover"> Se connecter</h2></a> 
         <a href="register.php"><h2 class="active">S'inscrire</h2></a>
         <!-- Login Form -->
-        <form method="POST" action="functions/functionRegister.php">
-        <input type="text" id="firstname" name="firstname" placeholder="prénom" autocomplete="off" class="<?php if((isset($_GET["error"]))){ echo 'error';}?>">
-        <input type="text" id="lastname" name="lastname" placeholder="nom" autocomplete="off" class="<?php if((isset($_GET["error"]))){ echo 'error';}?>">
-        <input type="text" id="username-register" name="username-register" placeholder="nom d'utilisateur" autocomplete="off" class="<?php if((isset($_GET["error"]))){ echo 'error';}?>">
-        <input type="password" id="password-register" name="password-register" placeholder="mot de passe" autocomplete="off" class="<?php if((isset($_GET["error"]))){ echo 'error';}?>">
-        <input type="submit" value="S'inscrire">
+        <form method="POST" action="">
+        <input type="text" id="firstname" name="firstname" placeholder="prénom" autocomplete="off" class="<?php if(isset($_GET["input0"]) && ($_GET["input0"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($firstnameRegister)){ echo $firstnameRegister; } ?>">
+        <input type="text" id="lastname" name="lastname" placeholder="nom" autocomplete="off" class="<?php if(isset($_GET["input1"]) && ($_GET["input1"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($lastnameRegister)){ echo $lastnameRegister; } ?>">
+        <input type="text" id="username-register" name="username-register" placeholder="nom d'utilisateur" autocomplete="off" class="<?php if(isset($_GET["input2"]) && ($_GET["input2"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($usernameRegister)){ echo $usernameRegister; } ?>">
+        <input type="password" id="password-register" name="password-register" placeholder="mot de passe" autocomplete="off" class="<?php if(isset($_GET["input3"]) && ($_GET["input3"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($passwordRegister)){ echo $passwordRegister; } ?>">
+        <input type="submit" value="S'inscrire" name="submit">
         </form>
         <!-- Remind Passowrd -->
         <div id="formFooter">
@@ -39,5 +56,9 @@ require_once("functions/function.php");
         </div>
     </div>
 </div>
+
+<script src="js/error.js"></script>
 </body>
 </html>
+
+<!-- ceci est un test -->
