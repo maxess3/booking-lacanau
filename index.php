@@ -4,6 +4,55 @@ require_once("functions/function.php");
 
 session_start(); 
 
+$today = date("Y-m-d");
+
+if(isset($_POST["submit"])){
+    if(isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && isset($_SESSION['password'])){
+        $idUser = $_SESSION['id'];
+        $username = $_SESSION['username'];
+        $firstname = $_SESSION['firstname'];
+        $lastname = $_SESSION['lastname'];
+        $password = $_SESSION['password'];
+        if(isset($_POST['people']) && isset($_POST['date-checkin']) && isset($_POST['hour-checkin']) && isset($_POST['date-checkout']) && isset($_POST['hour-checkout'])){
+            $people = $_POST['people'];
+            $dateCheckIn = $_POST['date-checkin'];
+            $hourCheckIn = $_POST['hour-checkin'];
+            $dateCheckOut = $_POST['date-checkout'];
+            $hourCheckOut = $_POST['hour-checkout'];
+            if(checkEmptyFormBooking($people,$dateCheckIn,$hourCheckIn,$dateCheckOut,$hourCheckOut)){
+                if($people >= 1 && $people <= 10){
+                    if(validateDate($dateCheckIn) && validateDate($dateCheckOut)){
+                        if($dateCheckIn >= $today){
+                            if($dateCheckIn < $dateCheckOut){
+                                if(notBooked($dateCheckIn,$dateCheckOut)){
+                                    insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut);
+                                    $_GET["register"] = "bookingSuccess";
+                                } else {
+                                    $_GET["error"] = "booked";
+                                }
+                            } else {
+                                $_GET["error"] = "incorrectDateOld";
+                            }
+                        } else {
+                            $_GET["error"] = "incorrectDateNow";
+                        }
+                    } else {
+                        $_GET["error"] = "incorrectDate";
+                    }
+                } else {
+                    $_GET["error"] = "peopleNumber";
+                }
+            } else {
+                $_GET["error"] = "blank";
+            }
+        } else {
+            $_GET["error"] = "formBookingNotCompleted";
+        }
+    } else {
+        header("Location: " . "login.php?error=notConnected");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -82,30 +131,30 @@ session_start();
                         ?></h1>
                         <p>Bienvenue sur le site de réservation de l'appartement 669 à Lacanau.<br/><span class="maxime">Créé par Maxime Schellenberger</span></p>
                     </div>
-                    <form action="functions/functionBooking.php" method="POST">
+                    <form action="" method="POST">
                         <div class="inner-form">
                             <div>           
                                 <label for="people">Personne(s) :</label>
-                                <input type="number" min="1" max="10" id="people" name="people" value="1">
+                                <input type="number" min="1" max="10" id="people" name="people" value="<?= isset($_POST['people']) && !empty($_POST['people']) ? $_POST['people'] : 1 ?>">
                             </div>     
                             <div>
                                 <label for="date-checkin">Jour d'arrivée :</label>
-                                <input type="date" id="date-checkin" name="date-checkin" value="<?= date('Y-m-d') ?>">
+                                <input type="date" id="date-checkin" name="date-checkin" value="<?= isset($_POST['date-checkin']) && !empty($_POST['date-checkin']) ? $_POST['date-checkin'] : date('Y-m-d') ?>">
                             </div>
                             <div>
                                 <label for="hour-checkin">Heure d'arrivée :</label>
-                                <input type="time" id="hour-checkin" name="hour-checkin" value="12:00">
+                                <input type="time" id="hour-checkin" name="hour-checkin" value="<?= isset($_POST['hour-checkin']) && !empty($_POST['hour-checkin']) ? $_POST['hour-checkin'] : "12:00" ?>">
                             </div>
                             <div>
                                 <label for="date-checkout">Jour de départ :</label>
-                                <input type="date" id="date-checkout" name="date-checkout">
+                                <input type="date" id="date-checkout" name="date-checkout" value="<?= isset($_POST['date-checkout']) && !empty($_POST['date-checkout']) ? $_POST['date-checkout'] : "" ?>">
                             </div>
                             <div>           
                                 <label for="hour-checkout">Heure du départ :</label>
-                                <input type="time" id="hour-checkout" name="hour-checkout" value="12:00">
+                                <input type="time" id="hour-checkout" name="hour-checkout" value="<?= isset($_POST['hour-checkout']) && !empty($_POST['hour-checkout']) ? $_POST['hour-checkout'] : "12:00" ?>">
                             </div>
                             <div class="btn-booking">           
-                                <button type="submit" id="submit-booking" value="Réserver">Réserver</button>
+                                <button type="submit" id="submit-booking" value="Réserver" name="submit">Réserver</button>
                             </div>
                         </div>
                     </form>

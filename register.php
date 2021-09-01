@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
 </head>
 <body>
 <div style="display: none;" class="<?= isset($_GET["error"])  ? "info-message" : ""?>">
-    <p><?php isset($_GET["error"]) ? printMessage($_GET["error"]) : "" ?></p>
+    <p><?= isset($_GET["error"]) ? printMessage($_GET["error"]) : "" ?></p>
     <img src="assets/img/error.png" alt="Message d'erreur" class="info-icon">
 </div>
 <div class="wrapper fadeInDown">
