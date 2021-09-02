@@ -154,7 +154,7 @@ if(isset($_POST["submit"])){
                                 <input type="time" id="hour-checkout" name="hour-checkout" value="<?= isset($_POST['hour-checkout']) && !empty($_POST['hour-checkout']) ? $_POST['hour-checkout'] : "12:00" ?>">
                             </div>
                             <div class="btn-booking">           
-                                <button type="submit" id="submit-booking" value="Réserver" name="submit">Réserver</button>
+                                <button type="submit" id="submit-booking" name="submit"><?= isset($_SESSION['id']) ? "Réserver" : "Se connecter"?></button>
                             </div>
                         </div>
                     </form>
