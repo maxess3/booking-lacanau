@@ -109,7 +109,7 @@ body{
 #main-ctn{
     position: relative;
     height: 100vh;
-    min-height: 900px;
+    min-height: 800px;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -131,6 +131,14 @@ body{
     position: relative;
     background-color: rgba(0,0,0,0.4);
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-not-connected{
+    position: relative;
+    background-color: rgba(0,0,0,0.4);
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -314,7 +322,7 @@ body{
   display: inline-flex;
   flex-wrap: wrap;
   width: 1200px;
-  margin: 50px auto;
+  margin: 0px auto;
 }
 
 .booking-card{
