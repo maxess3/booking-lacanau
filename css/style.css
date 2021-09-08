@@ -23,6 +23,36 @@ button, input[type="button"]{
     -webkit-appearance: none;
 }
 
+.connect-btn{
+    -webkit-appearance: none;
+    padding: 20px;
+    border: 0;
+    position: relative;
+    padding: 20px 30px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #0083bb;
+    cursor: pointer;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: all 0.2s ease;
+}
+
+.main-not-connected .connect-btn{
+    min-width: 230px;
+}
+
+.connect-btn:hover{
+    transition: all 0.2s ease;
+    background-color: #00567b;
+}
+
+.connect-btn:focus{
+    background-color: rgb(85, 85, 85);
+}
+
 @keyframes opacity {
     0%{
         opacity: 0;
@@ -114,6 +144,11 @@ body{
     background-repeat: no-repeat;
 }
 
+.main-not-connected{
+    height: initial !important;
+    min-height: initial !important;
+}
+
 .video{
     position: absolute;
     bottom: 0;
@@ -130,17 +165,13 @@ body{
 .child-main-ctn{
     position: relative;
     background-color: rgba(0,0,0,0.4);
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.main-not-connected{
-    position: relative;
-    background-color: rgba(0,0,0,0.4);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+.main-not-connected .child-main-ctn{
+  height: 800px;
 }
 
 .navbar-ctn{
@@ -198,6 +229,10 @@ body{
 
 .text-info{
    margin-bottom: 80px;
+}
+
+.main-not-connected .text-info{
+    margin-bottom: 20px;
 }
 
 .text-info > h1{
@@ -473,6 +508,7 @@ body{
 }
 
 .no-booking{
+    width: 700px;
     background-color: rgb(41, 41, 41);
     border-radius: 8px;
     display: flex;
@@ -724,6 +760,43 @@ body{
         width: 100%;
         margin: 0px auto;
         padding: 10px;
+    }
+
+    .child-main-ctn {
+        height: initial;
+    }
+
+    .main-not-connected{
+        min-height: initial !important;
+    }
+
+    .main-not-connected .view-booking-inner{
+        margin: 0;
+    }
+
+    .main-not-connected .view-booking-ctn{
+        margin: 0;
+    }
+
+    .main-not-connected .child-main-ctn{
+        height: initial !important;
+    }
+
+    .main-not-connected .child-main-ctn form button{
+        width: 100%;
+    }
+
+    .main-not-connected .view-booking-inner{
+        width: 90%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background: transparent;
+        padding: 0;
+    }
+
+    .main-not-connected .view-booking-inner input{
+        background-color:rgb(233, 130, 3);
+        color: white;
     }
 }
 

@@ -87,13 +87,13 @@ if(isset($_POST["submit"])){
             <p><?php isset($_GET["error"]) ? printMessage($_GET["error"]) : ""?></p>
             <img src="assets/img/error.png" alt="Message d'erreur" class="info-icon">
         </div>
-        <main id="main-ctn">
+        <main id="main-ctn" class="<?= isset($_SESSION['id']) ? "" : "main-not-connected" ?>">
             <div class="video">
                 <video autoplay muted loop id="lacanau-video">
                     <source src="assets/img/sea.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="<?= isset($_SESSION['id']) ? "child-main-ctn" : "main-not-connected" ?>">
+            <div class="child-main-ctn">
                 <div class="navbar-ctn">
                     <div class="logo">
                         <a href="index.php">
@@ -134,9 +134,7 @@ if(isset($_POST["submit"])){
                         <p>Bienvenue sur le site de réservation de l'appartement 669 à Lacanau.<br/><span class="maxime">Créé par Maxime Schellenberger</span></p>
                     </div>
                     <form action="" method="POST">
-                        <div class="inner-form">
-                            <?= isset($_SESSION['id']) ? $searchBarBooking : $test ?>
-                        </div>
+                            <?= isset($_SESSION['id']) ? $searchBarConnected : $searchBarNotConnected ?>
                     </form>
                 </div>
                 <div class="view-booking-ctn">
