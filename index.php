@@ -16,18 +16,18 @@ if(isset($_POST["submit"])){
         $lastname = $_SESSION['lastname'];
         $password = $_SESSION['password'];
         if(isset($_POST['people']) && isset($_POST['date-checkin']) && isset($_POST['hour-checkin']) && isset($_POST['date-checkout']) && isset($_POST['hour-checkout'])){
-            $people = $_POST['people'];
-            $dateCheckIn = $_POST['date-checkin'];
-            $hourCheckIn = $_POST['hour-checkin'];
-            $dateCheckOut = $_POST['date-checkout'];
-            $hourCheckOut = $_POST['hour-checkout'];
+            $people = htmlspecialchars($_POST['people']);
+            $dateCheckIn = htmlspecialchars($_POST['date-checkin']);
+            $hourCheckIn = htmlspecialchars($_POST['hour-checkin']);
+            $dateCheckOut = htmlspecialchars($_POST['date-checkout']);
+            $hourCheckOut = htmlspecialchars($_POST['hour-checkout']);
             if(checkEmptyFormBooking($people,$dateCheckIn,$hourCheckIn,$dateCheckOut,$hourCheckOut)){
                 if($people >= 1 && $people <= 10){
                     if(validateDate($dateCheckIn) && validateDate($dateCheckOut)){
                         if($dateCheckIn >= $today){
                             if($dateCheckIn < $dateCheckOut){
                                 if(notBooked($dateCheckIn,$dateCheckOut)){
-                                    insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut);
+                                    insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$username);
                                     $_GET["register"] = "bookingSuccess";
                                 } else {
                                     $_GET["error"] = "booked";

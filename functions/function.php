@@ -115,7 +115,7 @@ function insertUser($username,$firstname,$lastname,$password){
     }
 }
 
-function insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut){
+function insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$username){
     $db = connectDB();
     try {
        $sql = "INSERT INTO Appartment (id, people, date_checkin, date_checkout, hour_checkin, hour_checkout) VALUES (NULL, ?, ?, ?, ?, ?);
@@ -124,6 +124,7 @@ function insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$
        $stmt = $db->prepare($sql);
        $stmt->execute(array($people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$idUser));
        $stmt->closeCursor();
+       sendMail("maxschell31@gmail.com",$username);
     } catch (Exception $e) {
         sleep(1);
         header("Location: " . "../index.php?error=globalErrorBooking");
@@ -568,4 +569,23 @@ function getDateFR($date){
 
 function getTimeFR($time){
     return str_replace(":","h",date('G:i', strtotime($time)));
+}
+
+function sendMail($to,$username){
+    $subject = "Réservation Appartement Lacanau en attente, par $username";
+    $message = "<!DOCTYPE html>
+    <html lang=\"fr\">
+    <head>
+        <meta charset=\"UTF-8\">
+        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+        <title>Ceci est un email en html</title>
+    </head>
+    <body>
+        <p>La réservation de l'appartement est en attente d'approbation.</p>
+    </body>
+    </html>";
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    mail($to,$subject,$message,$headers);
 }
