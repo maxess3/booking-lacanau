@@ -27,7 +27,7 @@ if(isset($_POST["submit"])){
                         if($dateCheckIn >= $today){
                             if($dateCheckIn < $dateCheckOut){
                                 if(notBooked($dateCheckIn,$dateCheckOut)){
-                                    insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$username);
+                                    insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$username,$firstname,$lastname);
                                     $_GET["register"] = "bookingSuccess";
                                 } else {
                                     $_GET["error"] = "booked";

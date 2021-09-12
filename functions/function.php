@@ -1,14 +1,14 @@
 <?php
 
 function connectDB(){
-    $servername = "localhost:8889";
-    $username = "root";
-    $password = "root";
-    $dbname = "booking";
-    // $servername = "localhost";
-    // $username = "olym5493_maxime";
-    // $password = "i+NJRvB.fgWS";
-    // $dbname = "olym5493_booking";
+    // $servername = "localhost:8889";
+    // $username = "root";
+    // $password = "root";
+    // $dbname = "booking";
+    $servername = "localhost";
+    $username = "olym5493_maxime";
+    $password = "i+NJRvB.fgWS";
+    $dbname = "olym5493_booking";
     try {
         $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -115,7 +115,7 @@ function insertUser($username,$firstname,$lastname,$password){
     }
 }
 
-function insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$username){
+function insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$username,$firstname,$lastname){
     $db = connectDB();
     try {
        $sql = "INSERT INTO Appartment (id, people, date_checkin, date_checkout, hour_checkin, hour_checkout) VALUES (NULL, ?, ?, ?, ?, ?);
@@ -124,7 +124,7 @@ function insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$
        $stmt = $db->prepare($sql);
        $stmt->execute(array($people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$idUser));
        $stmt->closeCursor();
-       sendMail("maxschell31@gmail.com",$username);
+       sendMail($people,$username,$firstname,$lastname,$dateCheckIn,$dateCheckOut);
     } catch (Exception $e) {
         sleep(1);
         header("Location: " . "../index.php?error=globalErrorBooking");
@@ -571,18 +571,24 @@ function getTimeFR($time){
     return str_replace(":","h",date('G:i', strtotime($time)));
 }
 
-function sendMail($to,$username){
-    $subject = "Réservation Appartement Lacanau en attente, par $username";
+function sendMail($people,$username,$firstname,$lastname,$dateCheckIn,$dateCheckOut){
+    $dateCheckIn = getDateFR($dateCheckIn);
+    $dateCheckOut = getDateFR($dateCheckOut);
+    $to = "maxschell31@gmail.com";
+    $subject = "⚠️ Réservation Lacanau de $firstname $lastname en attente, $dateCheckIn - $dateCheckOut";
     $message = "<!DOCTYPE html>
     <html lang=\"fr\">
     <head>
         <meta charset=\"UTF-8\">
         <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-        <title>Ceci est un email en html</title>
     </head>
     <body>
-        <p>La réservation de l'appartement est en attente d'approbation.</p>
+        <p>Réservation en attente de $firstname $lastname : @$username</p>
+        <p>Réservation pour : $people personne(s)</p>
+        <p>Date de début du séjour : $dateCheckIn</p>
+        <p>Date de départ du séjour : $dateCheckOut</p>
+        <a href=\"https://cookierico.com/admin\"><input type=\"button\" value=\"Voir la réservation\" style=\"-webkit-appearance: none;border: 0;padding: 15px 40px;border-radius: 100px;background-color: #0083bb;cursor: pointer !important;color: white;font-weight: bold;font-size: 1.2em;\"></a>
     </body>
     </html>";
     $headers = "MIME-Version: 1.0" . "\r\n";
