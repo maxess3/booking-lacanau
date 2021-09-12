@@ -24,7 +24,7 @@ if(deleteBooking != undefined || deleteBooking != null){
                     console.log("Patientez...");
                 } else {
                     let confirm = window.confirm("Voulez-vous supprimer la réservation ?");
-                    confirm ?  fetchDeleteBooking(deleteBooking[i].dataset.id,deleteBooking[i].parentElement) : console.log("annulé");
+                    confirm ? fetchDeleteBooking(deleteBooking[i].dataset.id,deleteBooking[i].parentElement) : console.log("annulé");
                 }
             }
         });

@@ -124,7 +124,11 @@ function insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$
        $stmt = $db->prepare($sql);
        $stmt->execute(array($people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$idUser));
        $stmt->closeCursor();
-       sendMail($people,$username,$firstname,$lastname,$dateCheckIn,$dateCheckOut);
+       if(sendMail($people,$username,$firstname,$lastname,$dateCheckIn,$dateCheckOut)){
+
+       } else {
+         
+       }
     } catch (Exception $e) {
         sleep(1);
         header("Location: " . "../index.php?error=globalErrorBooking");
@@ -221,7 +225,7 @@ function getBooking($sessionUsername,$status){
                 // Display personnal bookings cards
                 if($sessionUsername != false && ($sessionUsername == $username)){
                     if($status == "0"){
-                        echo "<div class=\"booking-card\">
+                        echo "<div class=\"booking-card\" id=\"appt$idAppartment\">
                         <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                         <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status orange-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
                         <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
@@ -584,14 +588,15 @@ function sendMail($people,$username,$firstname,$lastname,$dateCheckIn,$dateCheck
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
     </head>
     <body>
-        <p>Réservation en attente de $firstname $lastname : @$username</p>
+        <p>Réservation en attente de : $firstname $lastname <span style=\"color: red;\">(@$username)</span></p>
         <p>Réservation pour : $people personne(s)</p>
         <p>Date de début du séjour : $dateCheckIn</p>
         <p>Date de départ du séjour : $dateCheckOut</p>
-        <a href=\"https://cookierico.com/admin\"><input type=\"button\" value=\"Voir la réservation\" style=\"-webkit-appearance: none;border: 0;padding: 15px 40px;border-radius: 100px;background-color: #0083bb;cursor: pointer !important;color: white;font-weight: bold;font-size: 1.2em;\"></a>
+        <a href=\"https://cookierico.com/admin\"><button style=\"-webkit-appearance: none;border: 0;padding: 15px 40px;border-radius: 100px;background-color: #0083bb;cursor: pointer !important;color: white;font-weight: bold;font-size: 1.2em;\"</button>Voir la réservation</a>
     </body>
     </html>";
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    mail($to,$subject,$message,$headers);
+    $headers .= 'From: <Reservation@no-reply.com>' . "\r\n";
+    return mail($to,$subject,$message,$headers);
 }
