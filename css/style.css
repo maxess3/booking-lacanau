@@ -137,8 +137,6 @@ body{
 
 #main-ctn{
     position: relative;
-    height: 100vh;
-    min-height: 800px;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -164,8 +162,8 @@ body{
 .child-main-ctn{
     position: relative;
     background-color: rgba(0,0,0,0.4);
-    height: 100vh;
     display: flex;
+    height: 100vh;
     flex-direction: column;
 }
 
@@ -826,5 +824,11 @@ body{
 
     .info-booking-status span{
         font-size: 1em;
+    }
+}
+
+@media screen and (max-height: 500px ) {
+    .child-main-ctn{
+        height: initial;
     }
 }
