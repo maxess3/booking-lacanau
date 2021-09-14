@@ -222,7 +222,7 @@ body{
 .booking-text{
     height: 100%;
     width: 90%;
-    margin: 80px auto;
+    margin: 40px auto;
     flex-direction: column;
 }
 
@@ -334,8 +334,6 @@ body{
 }
 
 .view-booking-inner{
-    position: absolute;
-    bottom: 0;
     padding: 30px;
     width: 100%;
     display: flex;
