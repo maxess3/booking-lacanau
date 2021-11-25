@@ -178,8 +178,13 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
             $statusClass = "pending";
             break;
         case 1:
-            $statusTitle = "Approuvé";
-            $statusClass = "accepted";
+            if(!$bookingPassed){
+                $statusTitle = "Approuvé";
+                $statusClass = "approved";
+            } else {
+                $statusTitle = "Passé";
+                $statusClass = "passed";
+            }
             break;
         case 2:
             $statusTitle = "Refusé";
@@ -362,36 +367,60 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                     </div>
                 </div>";
                 } else if($status == "1") {
-                    echo "<div class=\"booking-card\">
-                    <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
-                    <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
-                    <div class=\"card-info-people\">
-                        <span>$firstname $lastname</span>
-                        <span>@$username</span>
-                    </div>
-                    <div class=\"card-info-booking\">
-                        <span class=\"title-info-booking\">A réservé du :</span>
-                        <div class=\"date-booking\">
-                            <span class=\"date-checkin\">$dateCheckInFR</span> 
-                            <span class=\"date-checkout\">$dateCheckOutFR</span>
+                    if(!$bookingPassed){
+                        echo "<div class=\"booking-card\">
+                        <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
+                        <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
+                        <div class=\"card-info-people\">
+                            <span>$firstname $lastname</span>
+                            <span>@$username</span>
                         </div>
-                        <div class=\"date-booking\">
-                            <span>$hourCheckInFR</span>
-                            <span>$hourCheckOutFR</span>
+                        <div class=\"card-info-booking\">
+                            <span class=\"title-info-booking\">A réservé du :</span>
+                            <div class=\"date-booking\">
+                                <span class=\"date-checkin\">$dateCheckInFR</span> 
+                                <span class=\"date-checkout\">$dateCheckOutFR</span>
+                            </div>
+                            <div class=\"date-booking\">
+                                <span>$hourCheckInFR</span>
+                                <span>$hourCheckOutFR</span>
+                            </div>
+                            <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                            <span><span>$people</span></span>
                         </div>
-                        <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
-                        <span><span>$people</span></span>
-                    </div>
-                    <div title=\"Add to Calendar\" class=\"addeventatc custom-calendar\" data-styling=\"none\">
-                        Ajouter au calendrier
-                        <span class=\"start\">$dateCalendarCheckInFR $hourCalendarCheckInFR</span>
-                        <span class=\"end\">$dateCalendarCheckOutFR $hourCalendarCheckOutFR</span>
-                        <span class=\"timezone\">Europe/Paris</span>
-                        <span class=\"title\">Réservation Appartement 669 à Lacanau Océan</span>
-                        <span class=\"description\">Réservation Appartement 669, Résidence Océanide, Lacanau-Océan ($people personnes)</span>
-                        <span class=\"location\">Residence Oceanides, Rés Front de Mer, 33680 Lacanau, France</span>
-                    </div>
-                </div>";
+                        <div title=\"Add to Calendar\" class=\"addeventatc custom-calendar\" data-styling=\"none\">
+                            Ajouter au calendrier
+                            <span class=\"start\">$dateCalendarCheckInFR $hourCalendarCheckInFR</span>
+                            <span class=\"end\">$dateCalendarCheckOutFR $hourCalendarCheckOutFR</span>
+                            <span class=\"timezone\">Europe/Paris</span>
+                            <span class=\"title\">Réservation Appartement 669 à Lacanau Océan</span>
+                            <span class=\"description\">Réservation Appartement 669, Résidence Océanide, Lacanau-Océan ($people personnes)</span>
+                            <span class=\"location\">Residence Oceanides, Rés Front de Mer, 33680 Lacanau, France</span>
+                        </div>
+                    </div>";
+                    } else {
+                        echo "<div class=\"booking-card\">
+                        <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
+                        <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status grey-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
+                        <div class=\"card-info-people\">
+                            <span>$firstname $lastname</span>
+                            <span>@$username</span>
+                        </div>
+                        <div class=\"card-info-booking\">
+                            <span class=\"title-info-booking\">A réservé du :</span>
+                            <div class=\"date-booking\">
+                                <span class=\"date-checkin\">$dateCheckInFR</span> 
+                                <span class=\"date-checkout\">$dateCheckOutFR</span>
+                            </div>
+                            <div class=\"date-booking\">
+                                <span>$hourCheckInFR</span>
+                                <span>$hourCheckOutFR</span>
+                            </div>
+                            <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                            <span><span>$people</span></span>
+                        </div>
+                    </div>";
+                    }
                 } else {
                     echo "<div class=\"booking-card\">
                     <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
@@ -424,12 +453,21 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
            <p>Il n'y a pas de réservation en attente pour le moment</p>
         </div>";
        } else if($status == 1){
-        echo "<div class=\"no-booking\">
-            <div>
-                <img src=\"assets/img/error.png\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
-            </div>
-            <p>Il n'y a pas de réservation approuvée pour le moment</p>
-        </div>";
+           if(!$bookingPassed){
+            echo "<div class=\"no-booking\">
+                <div>
+                    <img src=\"assets/img/error.png\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
+                </div>
+                <p>Il n'y a pas de réservation approuvée pour le moment</p>
+            </div>";
+           } else {
+            echo "<div class=\"no-booking\">
+                <div>
+                    <img src=\"assets/img/error.png\" alt=\"Aucune réservation\" class=\"no-booking-icon\">
+                </div>
+                <p>Il n'y a pas de réservation passée pour le moment</p>
+            </div>";
+           }
        } else {
         echo "<div class=\"no-booking\">
         <div>

@@ -51,7 +51,7 @@ if(isset($_POST["submit"])){
             $_GET["error"] = "formBookingNotCompleted";
         }
     } else {
-        header("Location: " . "login.php?error=notConnected");
+        header("Location: " . "login.php");
     }
 }
 
