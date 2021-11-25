@@ -168,7 +168,10 @@ function updateStatusBooking($status,$idAppt){
     }
 }
 
-function getBooking($sessionUsername,$status){
+function getBooking($sessionUsername,$status,$bookingPassed=false){
+    // Status 0 => Pending
+    // Status 1 => Approuved
+    // Status 2 => Rejected
     switch ($status) {
         case 0:
             $statusTitle = "En attente";
@@ -185,18 +188,30 @@ function getBooking($sessionUsername,$status){
         default:
             $statusTitle = "Erreur";
             break;
-    }
+    } 
     $db = connectDB();
     try {
-       $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, updated_at, status, username, firstname, lastname 
-       FROM Book b 
-       INNER JOIN Appartment a 
-       ON b.id_appartment = a.id 
-       INNER JOIN User u 
-       ON b.id_user = u.id
-       WHERE NOW() < a.date_checkout
-       AND a.status = $status
-       ORDER BY a.date_checkout ASC";
+        if(!$bookingPassed){
+            $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, updated_at, status, username, firstname, lastname 
+            FROM Book b 
+            INNER JOIN Appartment a 
+            ON b.id_appartment = a.id 
+            INNER JOIN User u 
+            ON b.id_user = u.id
+            WHERE NOW() < a.date_checkout
+            AND a.status = $status
+            ORDER BY a.date_checkout ASC";
+        } else {
+            $sql = "SELECT a.id, people, date_checkin, date_checkout, hour_checkin, hour_checkout, updated_at, status, username, firstname, lastname 
+            FROM Book b 
+            INNER JOIN Appartment a 
+            ON b.id_appartment = a.id 
+            INNER JOIN User u 
+            ON b.id_user = u.id
+            WHERE NOW() > a.date_checkout
+            AND a.status = $status
+            ORDER BY a.date_checkout ASC";
+        }
        $stmt = $db->query($sql);
        // Display bookings cards
        if($stmt->rowCount() > 0){

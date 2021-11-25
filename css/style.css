@@ -619,6 +619,10 @@ body{
     border-bottom: 10px solid rgb(211, 41, 41);
 }
 
+.status-grey{
+    border-bottom: 10px solid grey;
+}
+
 .info-booking-status span{
     font-weight: bold;
     font-size: 1.2em;
@@ -810,6 +814,10 @@ body{
     .main-not-connected .view-booking-inner input{
         background-color:rgb(233, 130, 3);
         color: white;
+    }
+
+    .main-not-connected .view-booking-inner input:hover{
+        background-color:rgb(157, 96, 21);
     }
 }
 
