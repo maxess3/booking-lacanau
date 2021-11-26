@@ -263,7 +263,7 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                                     <span>$hourCheckInFR</span>
                                     <span>$hourCheckOutFR</span>
                                 </div>
-                                <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                                <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                                 <span><span class=\"unique-people-number\">$people</span></span>
                             </div>
                             <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
@@ -296,7 +296,7 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                                     <span>$hourCheckInFR</span>
                                     <span>$hourCheckOutFR</span>
                                 </div>
-                                <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                                <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                                 <span><span class=\"unique-people-number\">$people</span></span>
                             </div>
                             <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
@@ -329,7 +329,7 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                                     <span>$hourCheckInFR</span>
                                     <span>$hourCheckOutFR</span>
                                 </div>
-                                <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                                <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                                 <span><span class=\"unique-people-number\">$people</span></span>
                             </div>
                             <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
@@ -353,7 +353,7 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                             <span>$hourCheckInFR</span>
                             <span>$hourCheckOutFR</span>
                         </div>
-                        <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                        <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                         <span><span>$people</span></span>
                     </div>
                     <div title=\"Add to Calendar\" class=\"addeventatc custom-calendar\" data-styling=\"none\">
@@ -385,7 +385,7 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                                 <span>$hourCheckInFR</span>
                                 <span>$hourCheckOutFR</span>
                             </div>
-                            <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                            <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                             <span><span>$people</span></span>
                         </div>
                         <div title=\"Add to Calendar\" class=\"addeventatc custom-calendar\" data-styling=\"none\">
@@ -416,7 +416,7 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                                 <span>$hourCheckInFR</span>
                                 <span>$hourCheckOutFR</span>
                             </div>
-                            <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                            <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                             <span><span>$people</span></span>
                         </div>
                     </div>";
@@ -439,7 +439,7 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                             <span>$hourCheckInFR</span>
                             <span>$hourCheckOutFR</span>
                         </div>
-                        <span class=\"title-info-booking\"><img src=\"assets/img/user.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
+                        <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                         <span><span>$people</span></span>
                     </div>
                 </div>";

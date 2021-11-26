@@ -94,6 +94,25 @@ if(isset($_POST["submit"])){
             <p><?php isset($_GET["error"]) ? printMessage($_GET["error"]) : ""?></p>
             <img src="assets/img/error.png" alt="Message d'erreur" class="info-icon">
         </div>
+        <div class="info-weather">
+            <div class="info-weather-inner">
+                <div class="close-info-weather">
+                    <img src="assets/img/times-solid.svg" alt="" style="width: 1.4em;">
+                </div>
+                <div class="info-weather-block">
+                    <span>Température de l'air :</span>
+                    <span class="info-temp-weather">22°</span>
+                </div>
+                <div class="info-weather-block">
+                    <span>Température de l'eau :</span>
+                    <span class="info-temp-weather">15°</span>
+                </div>
+                <div class="info-weather-block">
+                    <span>Hauteur des vagues :</span>
+                    <span class="info-temp-weather">2m</span>
+                </div>
+            </div>
+        </div>
         <main id="main-ctn" class="<?= isset($_SESSION['id']) ? "" : "main-not-connected" ?>">
             <div class="video">
                 <video autoplay muted loop id="lacanau-video">
@@ -106,6 +125,9 @@ if(isset($_POST["submit"])){
                         <a href="index.php">
                             <img src="assets/logo/logo.svg" alt="Accueil réservation">
                         </a>
+                        <span class="weather">
+                            <img src="assets/img/cloud-sun-solid.svg" alt="Voir la méteo" style="width: 1.7em;">
+                        </span>
                     </div>
                     <?php 
                         if(empty($_SESSION)){
@@ -132,7 +154,7 @@ if(isset($_POST["submit"])){
                 </div>
                 <div class="booking-text">
                     <div class="text-info">
-                        <h3>Résidence Océanide 28°</h3>
+                        <h3>Résidence Océanide<span id="display-weather">28°</span></h3>
                         <h1>Réservez votre séjour 
                         <?php if(!empty($_SESSION)){
                             echo $_SESSION['firstname'];
@@ -165,5 +187,6 @@ if(isset($_POST["submit"])){
         </div>
     </div>
     <script src="js/script.js"></script>
+    <script src="js/weather/weather.js"></script>
 </body>
 </html>
