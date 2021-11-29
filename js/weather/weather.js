@@ -14,9 +14,11 @@
 const displayWeather = document.querySelector(".weather");
 const pannelWeather = document.querySelector(".info-weather");
 const closeWeatherInfo = document.querySelector(".close-info-weather");
+
 displayWeather.addEventListener("click", () => {
     pannelWeather.classList.add("info-weather-open");
 })
+
 closeWeatherInfo.addEventListener("click", () => {
     pannelWeather.classList.remove("info-weather-open");
 })

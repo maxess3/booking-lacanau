@@ -266,7 +266,6 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                                 <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                                 <span><span class=\"unique-people-number\">$people</span></span>
                             </div>
-                            <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                             <div title=\"Add to Calendar\" class=\"addeventatc custom-calendar\" data-styling=\"none\">
                                 Ajouter au calendrier
                                 <span class=\"start\">$dateCalendarCheckInFR $hourCalendarCheckInFR</span>
@@ -299,7 +298,6 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                                 <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                                 <span><span class=\"unique-people-number\">$people</span></span>
                             </div>
-                            <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                             <div title=\"Add to Calendar\" class=\"addeventatc custom-calendar\" data-styling=\"none\">
                                 Ajouter au calendrier
                                 <span class=\"start\">$dateCalendarCheckInFR $hourCalendarCheckInFR</span>
@@ -332,7 +330,6 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                                 <span class=\"title-info-booking\"><img src=\"assets/img/user2.svg\" class=\"user-icon-card\"/>Nombre de personnes :</span>
                                 <span><span class=\"unique-people-number\">$people</span></span>
                             </div>
-                            <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                         </div>";
                     }
                 } else if($status == "0") {

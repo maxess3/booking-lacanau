@@ -62,7 +62,7 @@ if(isset($_POST["submit"])){
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
     <meta name="description" content="Site de réservation pour l'appartement de la résidence Océanide de Lacanau">
     <title>Lacanau | Réserver l'appartement</title>
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
@@ -96,9 +96,6 @@ if(isset($_POST["submit"])){
         </div>
         <div class="info-weather">
             <div class="info-weather-inner">
-                <div class="close-info-weather">
-                    <img src="assets/img/times-solid.svg" alt="" style="width: 1.4em;">
-                </div>
                 <div class="info-weather-block">
                     <span>Température de l'air :</span>
                     <span class="info-temp-weather">22°</span>
@@ -111,6 +108,80 @@ if(isset($_POST["submit"])){
                     <span>Hauteur des vagues :</span>
                     <span class="info-temp-weather">2m</span>
                 </div>
+                <div class="close-info-weather">
+                    <img src="assets/img/times-solid.svg" alt="" style="width: 1.4em;">
+                </div>
+            </div>
+            <div class="waves">
+                <svg width="100%" height="200px" fill="none" version="1.1"
+                xmlns="http://www.w3.org/2000/svg">
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00B4DB" />
+                    <stop offset="50%" stop-color="#224488" />
+                    <stop offset="100%" stop-color="#0083B0" />
+                </linearGradient>
+                <path 
+                    fill="url(#grad1)" 
+                    d="
+                    M0 67
+                    C 273,183
+                        822,-40
+                        1920.00,106 
+                    
+                    V 359 
+                    H 0 
+                    V 67
+                    Z">
+                    <animate 
+                    repeatCount="indefinite" 
+                    fill="url(#grad1)" 
+                    attributeName="d" 
+                    dur="15s"
+                    attributeType="XML"
+                    values="
+                        M0 77 
+                        C 473,283
+                        822,-40
+                        1920,116 
+                        
+                        V 359 
+                        H 0 
+                        V 67 
+                        Z; 
+
+                        M0 77 
+                        C 473,-40
+                        1222,283
+                        1920,136 
+                        
+                        V 359 
+                        H 0 
+                        V 67 
+                        Z; 
+
+                        M0 77 
+                        C 973,260
+                        1722,-53
+                        1920,120 
+                        
+                        V 359 
+                        H 0 
+                        V 67 
+                        Z; 
+
+                        M0 77 
+                        C 473,283
+                        822,-40
+                        1920,116 
+                        
+                        V 359 
+                        H 0 
+                        V 67 
+                        Z
+                        ">
+                    </animate>
+                </path>
+                </svg>
             </div>
         </div>
         <main id="main-ctn" class="<?= isset($_SESSION['id']) ? "" : "main-not-connected" ?>">
@@ -154,7 +225,7 @@ if(isset($_POST["submit"])){
                 </div>
                 <div class="booking-text">
                     <div class="text-info">
-                        <h3>Résidence Océanide<span id="display-weather">28°</span></h3>
+                        <h3>Résidence Océanide</h3>
                         <h1>Réservez votre séjour 
                         <?php if(!empty($_SESSION)){
                             echo $_SESSION['firstname'];

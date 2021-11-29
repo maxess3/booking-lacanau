@@ -114,10 +114,6 @@ button, input[type="button"]{
     opacity: 0.6;
 }
 
-video{
-    width: 100%;
-}
-
 input{
     border: none;
     padding: 0;
@@ -150,40 +146,42 @@ body{
     display: none;
     position: fixed; 
     width: 100%; 
-    height:100vh; 
-    background-color: rgba(0,0,0,0.92);
+    height: 100vh; 
+    background-color: rgba(0,0,0,0.95);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index:1000;
-    justify-content:center;
-    align-items:center;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
 .info-weather-open{
     display: flex !important;
+    z-index: 2000;
 }
 
 .info-weather-inner{
-    width:900px;
-    height:30%;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    padding:15px;
-    position:relative;
+    z-index: 500;
+    position: relative;
+    width: 900px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: -50px;
 }
 
 .close-info-weather{
     position: absolute;
-    width:60px;
-    height:60px;
-    background-color:#2a2a2a;
-    right:30px;
-    top: -45px;
-    border-radius:10px;
-    display:flex;
-    justify-content:center;
+    top: -25%;
+    right: -2%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
     transition: all 0.2s ease;
     cursor: pointer;
 }
@@ -193,6 +191,25 @@ body{
     transition: all 0.2s ease;
 }
 
+div.waves{
+    width: 100%;
+    bottom: 0;
+    /* height: 100%;*/
+    position: absolute;
+    z-index: 100;
+}
+  
+svg{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    animation-name: move-left;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 .info-temp-weather{
     font-size: 4em;
     font-weight:bold;
@@ -200,6 +217,7 @@ body{
 
 .info-weather-block{
     background-color: #2796bf;
+    border: 5px solid rgb(50, 50, 50);
     width: 30%;
     height: 200px;
     display:flex;
@@ -236,14 +254,9 @@ body{
     min-height: 100%;
 }
 
-#lacanau-video{
-    width: auto;
-    height: 100%;
-}
-
 .child-main-ctn{
     position: relative;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.5);
     display: flex;
     height: 100vh;
     flex-direction: column;
@@ -342,7 +355,7 @@ body{
 }
 
 .text-info > h1{
-    font-size: 4em;
+    font-size: 3.5em;
 }
 
 .text-info > h3{
@@ -376,7 +389,7 @@ body{
 
 .inner-form > div:not(.inner-form div:last-child)::after{
     position: absolute;
-    z-index: 20000;
+    z-index: 1000;
     content: '';
     top: 50%;
     transform: translateY(-50%);
@@ -499,9 +512,10 @@ body{
 }
 
 .booking-card:hover{
-    transition: box-shadow 0.2s ease;
+    transition: all 0.2s ease;
     -webkit-box-shadow: 5px 9px 33px 7px rgba(0,0,0,0.17); 
     box-shadow: 5px 9px 33px 7px rgba(0,0,0,0.17);
+    border: 5px solid rgb(63, 63, 63);
 }
 
 .status-msg{
@@ -673,7 +687,7 @@ body{
 
 .delete-booking{
     cursor: pointer;
-    z-index: 2000;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -787,6 +801,23 @@ body{
     background-color: grey;
 }
 
+@media screen and (max-height: 720px) {
+    #main-ctn {
+        background: url("../assets/img/wave.webp");
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: initial;
+    }
+    .child-main-ctn {
+        height: initial;
+    }
+
+    .text-info > h1 {
+     font-size: 2.6em;
+    }
+
+}
+
 @media screen and (min-height: 1200px) {
     #main-ctn{
         max-height: 1200px;
@@ -827,6 +858,27 @@ body{
 }
 
 @media screen and (max-width: 1000px) {
+    .close-info-weather{
+        right: 6%;
+        top: -12%;
+    }
+
+    .info-temp-weather {
+        font-size: 3em;
+    }
+
+    .info-weather-inner{
+        flex-direction: column;
+    }
+
+    .info-weather-block{
+        align-items: center;
+        margin-bottom: 20px;
+        height: 140px;
+        width: 80%;
+    }
+    
+
     input[type="date"], input[type="time"], input[type="number"]{
         font-size: 1em;
     }
@@ -953,7 +1005,34 @@ body{
     }
 }
 
+@media screen and (max-width: 600px) {
+    .close-info-weather{
+        top: initial;
+        bottom: -26%;
+        right: 0;
+        left: 50%;
+        border-radius:10px;
+        cursor: pointer;
+    }
+}
+
 @media screen and (max-width: 390px) {
+    .text-info > h1{
+        font-size: 2.1em;
+    }
+
+    .close-info-weather{
+        width: 40%;
+    }
+
+    .info-weather-block{
+        height: 100px;
+    }
+
+    .info-temp-weather{
+        font-size: 2em;
+    }
+
     .status{
         width: 50%;
     }
@@ -964,6 +1043,18 @@ body{
 
     .info-booking-status span{
         font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 312px ) {
+    .info-weather-block > span:first-child{
+        font-size: 0.9em;
+    }
+    .info-weather-block > span:last-child{
+        font-size: 1.2em;
+    }
+    .info-weather-block {
+        padding: 0;
     }
 }
 
