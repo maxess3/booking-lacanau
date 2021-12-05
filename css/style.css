@@ -210,13 +210,13 @@ svg{
     animation-direction: alternate;
 }
 
-.load-temp-info{
-    font-size: 3.5em;
-}
-
 .info-temp-air, .info-temp-water, .info-swell{
     font-size: 2em;
     font-weight:bold;
+}
+
+.load-temp-info{
+    font-size: 3.5em !important;
 }
 
 .degree-temp{
