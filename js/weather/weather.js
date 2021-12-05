@@ -12,15 +12,15 @@ const params = 'airTemperature,waterTemperature,swellHeight';
 
 displayWeather.addEventListener("click", () => {
     pannelWeather.classList.add("info-weather-open");
-//     fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
-//         headers: {
-//         'Authorization': 'dd6eee86-4e93-11ec-86f0-0242ac130002-dd6eeef4-4e93-11ec-86f0-0242ac130002'
-//         }
-//     }).then((response) => response.json()).then((jsonData) => {
-//         airTemperature.innerHTML = jsonData.hours[0].airTemperature.dwd + "<span class=\"degree-temp\">°</span>";
-//         waterTemperature.innerHTML = jsonData.hours[0].waterTemperature.meto + "<span class=\"degree-temp\">°</span>";
-//         swellHeight.textContent = jsonData.hours[0].swellHeight.dwd + "m";
-//     });
+    fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
+        headers: {
+        'Authorization': 'dd6eee86-4e93-11ec-86f0-0242ac130002-dd6eeef4-4e93-11ec-86f0-0242ac130002'
+        }
+    }).then((response) => response.json()).then((jsonData) => {
+        airTemperature.innerHTML = jsonData.hours[0].airTemperature.dwd + "<span class=\"degree-temp\">°</span>";
+        waterTemperature.innerHTML = jsonData.hours[0].waterTemperature.meto + "<span class=\"degree-temp\">°</span>";
+        swellHeight.textContent = jsonData.hours[0].swellHeight.dwd + "m";
+    });
 })
 
 closeWeatherInfo.addEventListener("click", () => {
