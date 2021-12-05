@@ -98,15 +98,15 @@ if(isset($_POST["submit"])){
             <div class="info-weather-inner">
                 <div class="info-weather-block">
                     <span>Température de l'air :</span>
-                    <span class="info-temp-weather">22°</span>
+                    <span class="info-temp-air">Loading...</span>
                 </div>
                 <div class="info-weather-block">
                     <span>Température de l'eau :</span>
-                    <span class="info-temp-weather">15°</span>
+                    <span class="info-temp-water">Loading...</span>
                 </div>
                 <div class="info-weather-block">
                     <span>Hauteur des vagues :</span>
-                    <span class="info-temp-weather">2m</span>
+                    <span class="info-swell">Loading...</span>
                 </div>
                 <div class="close-info-weather">
                     <img src="assets/img/times-solid.svg" alt="" style="width: 1.4em;">

@@ -210,9 +210,17 @@ svg{
     animation-direction: alternate;
 }
 
-.info-temp-weather{
-    font-size: 4em;
+.load-temp-info{
+    font-size: 3.5em;
+}
+
+.info-temp-air, .info-temp-water, .info-swell{
+    font-size: 2em;
     font-weight:bold;
+}
+
+.degree-temp{
+    margin-left: 4px;
 }
 
 .info-weather-block{
@@ -863,7 +871,7 @@ svg{
         top: -12%;
     }
 
-    .info-temp-weather {
+    .info-temp-water, .info-temp-air, .info-swell {
         font-size: 3em;
     }
 
@@ -1029,7 +1037,7 @@ svg{
         height: 100px;
     }
 
-    .info-temp-weather{
+    .info-temp-water, .info-temp-air, .info-swell{
         font-size: 2em;
     }
 
