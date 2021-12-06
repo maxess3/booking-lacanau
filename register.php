@@ -60,5 +60,3 @@ if(isset($_POST['submit'])){
 <script src="js/error.js"></script>
 </body>
 </html>
-
-<!-- ceci est un test -->

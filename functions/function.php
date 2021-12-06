@@ -1,11 +1,11 @@
 <?php
 
 function connectDB(){
-    // $servername = "localhost:8889";
-    $servername = "localhost";
+    $servername = "localhost:8889";
+    // $servername = "localhost";
     $username = "root";
-    // $password = "root";
-    $password = "";
+    $password = "root";
+    // $password = "";
     $dbname = "booking";
     // $servername = "localhost";
     // $username = "olym5493_maxime";
