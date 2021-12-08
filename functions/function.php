@@ -1,11 +1,11 @@
 <?php
 
 function connectDB(){
-    $servername = "localhost:8889";
-    // $servername = "localhost";
+    // $servername = "localhost:8889";
+    $servername = "localhost";
     $username = "root";
-    $password = "root";
-    // $password = "";
+    // $password = "root";
+    $password = "";
     $dbname = "booking";
     // $servername = "localhost";
     // $username = "olym5493_maxime";
@@ -247,10 +247,10 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                 // Display personnal bookings cards
                 if($sessionUsername != false && ($sessionUsername == $username)){
                     if($status == "0"){
-                        echo "<div class=\"booking-card\" id=\"appt$idAppartment\">
+                        echo "<div class=\"booking-card\" id=\"$idAppartment\">
                         <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                         <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status orange-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
-                        <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
+                        <div class=\"delete-booking\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                             <div class=\"card-info-people unique-card-color\">
                                 <span>$firstname $lastname</span>
                                 <span>@$username</span>
@@ -279,10 +279,10 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                             </div>
                         </div>";
                     } else if($status == "1") {
-                        echo "<div class=\"booking-card\">
+                        echo "<div class=\"booking-card\" id=\"$idAppartment\">
                         <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                         <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
-                        <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
+                        <div class=\"delete-booking\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                             <div class=\"card-info-people unique-card-color\">
                                 <span>$firstname $lastname</span>
                                 <span>@$username</span>
@@ -311,10 +311,10 @@ function getBooking($sessionUsername,$status,$bookingPassed=false){
                             </div>
                         </div>";
                     } else {
-                        echo "<div class=\"booking-card\">
+                        echo "<div class=\"booking-card\" id=\"$idAppartment\">
                         <div class=\"status-msg\">Statut mis à jour par l'admin<span class=\"bold-status\">$updatedAtFR</span>à<span class=\"bold-status\">$updatedAtTime</span></div>
                         <div class=\"status $statusClass\">$statusTitle<span class=\"update-time-status red-status\"><img src=\"assets/img/info.svg\" class=\"icon\"></span></div>
-                        <div class=\"delete-booking\" data-id=\"$idAppartment\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
+                        <div class=\"delete-booking\"><img src=\"assets/img/delete.svg\" alt=\"Supprimer la réservation\"/></div>
                             <div class=\"card-info-people unique-card-color\">
                                 <span>$firstname $lastname</span>
                                 <span>@$username</span>
