@@ -19,26 +19,32 @@ for (let i = 0; i < getInfoStatusBtn.length; i++) {
     });
 }
 
-
 const bookingCard = document.getElementsByClassName("booking-card");
 const deleteBooking = document.getElementsByClassName("delete-booking");
 const messageSuccess = document.querySelector(".message-ajax");
 const contentMessage = document.querySelector(".content-message-ajax");
 const infoIcon = document.querySelector(".info-icon");
 let serverResponse = null;
+let confirm = null;
+let xhr = null;
 if(deleteBooking != undefined || deleteBooking != null){
     for (let i = 0; i < deleteBooking.length; i++) {
         deleteBooking[i].onclick = function(e){
             if(messageSuccess !== undefined || messageSuccess !== null || contentMessage !== undefined || contentMessage !== null){  
-                let confirm = window.confirm("Voulez-vous supprimer la réservation ?");
-                confirm ? fetchDeleteBooking(this.parentNode.id,this.parentNode) : console.log("annulé");
+                if(messageSuccess.classList.contains("message-ajax-anim")){
+                    e.preventDefault();
+                    console.log("Patientez...");
+                } else {
+                    confirm = window.confirm("Voulez-vous supprimer la réservation ?");
+                    confirm ? fetchDeleteBooking(this.parentNode.id,this.parentNode) : console.log("Action annulée...");
+                }
             }
         }
     }
 }
 
 function fetchDeleteBooking(id,deleteElement){
-   const xhr = new XMLHttpRequest();
+    xhr = new XMLHttpRequest();
     xhr.onload = function(){
     serverResponse = this.responseText;
         if(infoIcon !== undefined || infoIcon !== null){
