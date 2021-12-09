@@ -10,5 +10,4 @@ if(isset($_POST['deleteBooking']) && !empty($_POST['deleteBooking'])){
     echo "error";
 }
 
-
 ?>

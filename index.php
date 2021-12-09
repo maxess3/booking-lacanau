@@ -246,18 +246,15 @@ if(isset($_POST["submit"])){
         </main>
         <div id="list-booking-ctn">
             <div class="list-booking-inner">
-                <div class="info-booking-status status-green"><span>Réservations approuvées :</span></div>
                 <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],1) : getBooking(false,1); ?>
-                <div class="info-booking-status status-orange" id="pending-list"><span>Réservations mises en attente :</span></div>
                 <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],0) : getBooking(false,0); ?>
-                <div class="info-booking-status status-red"><span>Réservations annulées :</span></div>
                 <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],2) : getBooking(false,2); ?>
-                <div class="info-booking-status status-grey"><span>Réservations passées :</span></div>
                 <?php getBooking(false,1,true); ?>
             </div>
         </div>
     </div>
     <script src="js/script.js"></script>
+    <script src="js/scroll.js"></script>
     <script src="js/weather/weather.js"></script>
 </body>
 </html>

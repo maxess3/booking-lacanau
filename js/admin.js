@@ -6,15 +6,18 @@ if(btnIndex != undefined || btnIndex != null){
 };
 
 const btnModify = document.querySelectorAll(".modify");
+let target = null;
+let targetClassList = null;
+let idAppt = null;
 for(let i = 0; i < btnModify.length; i++) {
     btnModify[i].addEventListener("click", (e) => {
-        let target = e.target;
-        let targetClassList = target.classList;
-        let idAppt = target.parentNode.parentNode.parentNode.dataset.appartment;
-        if(targetClassList.contains("accepted")){
-            fetchUpdateBooking(1,idAppt);
-        } else if(targetClassList.contains("pending")){
+        target = e.target;
+        targetClassList = target.classList;
+        idAppt = target.parentNode.parentNode.parentNode.dataset.appartment;
+        if(targetClassList.contains("pending")){
             fetchUpdateBooking(0,idAppt);
+        } else if(targetClassList.contains("accepted")){
+            fetchUpdateBooking(1,idAppt);
         } else if(targetClassList.contains("rejected")){
             fetchUpdateBooking(2,idAppt);
         } else {
@@ -23,17 +26,17 @@ for(let i = 0; i < btnModify.length; i++) {
     });
 };
 
+let xhr = null;
+let serverResponse = null;
 function fetchUpdateBooking(status,idAppt){
-    const xhr = new XMLHttpRequest();
+    xhr = new XMLHttpRequest();
     xhr.onload = function(){
-    const serverResponse = this.responseText;
+    serverResponse = this.responseText;
         if (xhr.readyState === xhr.DONE) {
             if (xhr.status === 200) {
-                console.log("validé");
-                console.log(serverResponse);
                 document.location.reload();
             } else {
-                console.log("probleme");
+                console.log("Il y a un problème...");
             }
         }
     }
