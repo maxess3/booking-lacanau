@@ -23,17 +23,21 @@ let confirm = null;
 let xhr = null;
 if (deleteBooking != undefined || deleteBooking != null) {
     for (let i = 0; i < deleteBooking.length; i++) {
-        deleteBooking[i].onclick = function (e) {
-            // clearInterval(getBooking);
+        deleteBooking[i].onclick = function(e) {
+            clearInterval(getBooking);
             if (messageSuccess !== undefined || messageSuccess !== null || contentMessage !== undefined || contentMessage !== null) {
                 if (messageSuccess.classList.contains("message-ajax-anim")) {
                     e.preventDefault();
                     console.log("Patientez...");
                 } else {
-                    // confirm = window.confirm("Voulez-vous supprimer la réservation ?");
-                    // if(confirm){
-                    //     fetchDeleteBooking(this.parentNode.id, this.parentNode)
-                    // }
+                    let confirm = window.confirm("Voulez-vous supprimer la réservation ?");
+                    if (confirm) {
+                        fetchDeleteBooking(this.parentNode.id, this.parentNode)
+                    } else {
+                        getBooking = setInterval(function() {
+                            fetchBooking();
+                        }, 5000)
+                    }
                 }
             }
         }
@@ -42,7 +46,7 @@ if (deleteBooking != undefined || deleteBooking != null) {
 
 function fetchDeleteBooking(id, deleteElement) {
     xhr = new XMLHttpRequest();
-    xhr.onload = function () {
+    xhr.onload = function() {
         serverResponse = this.responseText;
         if (infoIcon !== undefined || infoIcon !== null) {
             if (serverResponse === "success") {
@@ -53,16 +57,16 @@ function fetchDeleteBooking(id, deleteElement) {
                     deleteBooking[i].style.opacity = "0.2";
                     deleteBooking[i].style.cursor = "not-allowed";
                 }
-                window.setTimeout(function () {
+                window.setTimeout(function() {
                     messageSuccess.classList.remove("message-ajax-anim");
                     for (let i = 0; i < deleteBooking.length; i++) {
                         deleteBooking[i].style.opacity = "0.9";
                         deleteBooking[i].style.cursor = "pointer";
                     }
                     deleteElement.remove();
-                    test = window.setInterval(function(){
+                    getBooking = window.setInterval(function() {
                         fetchBooking();
-                    },5000)
+                    }, 5000)
                 }, 4500);
             } else {
                 contentMessage.textContent = "Un problème est survenu dans la suppression de la réservation";
@@ -77,29 +81,37 @@ function fetchDeleteBooking(id, deleteElement) {
 }
 
 const listBookingInner = document.querySelector(".list-booking-inner");
+
 function fetchBooking() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var response = xhttp.responseText;
             listBookingInner.innerHTML = response;
+            setTimeout(function() { addeventatc.refresh(); }, 200);
+            const getInfoStatusBtn = document.querySelectorAll(".update-time-status");
+            const msgStatus = document.querySelectorAll(".status-msg");
+            for (let i = 0; i < getInfoStatusBtn.length; i++) {
+                getInfoStatusBtn[i].addEventListener("click", () => {
+                    msgStatus[i].classList.toggle("info-toggle");
+                });
+            }
             if (deleteBooking != undefined || deleteBooking != null) {
                 for (let i = 0; i < deleteBooking.length; i++) {
-                    deleteBooking[i].onclick = function (e) {
-                        console.log("click");
-                        clearInterval(test)
+                    deleteBooking[i].onclick = function(e) {
+                        clearInterval(getBooking)
                         if (messageSuccess !== undefined || messageSuccess !== null || contentMessage !== undefined || contentMessage !== null) {
                             if (messageSuccess.classList.contains("message-ajax-anim")) {
                                 e.preventDefault();
                                 console.log("Patientez...");
                             } else {
                                 let confirm = window.confirm("Voulez-vous supprimer la réservation ?");
-                                if(confirm){
+                                if (confirm) {
                                     fetchDeleteBooking(this.parentNode.id, this.parentNode)
                                 } else {
-                                    test = window.setInterval(function(){
+                                    getBooking = setInterval(function() {
                                         fetchBooking();
-                                    },5000)
+                                    }, 5000)
                                 }
                             }
                         }
@@ -112,6 +124,6 @@ function fetchBooking() {
     xhttp.send();
 }
 
-let test = window.setInterval(function(){
+let getBooking = setInterval(function() {
     fetchBooking();
-},5000)
+}, 5000);

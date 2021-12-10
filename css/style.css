@@ -1,29 +1,30 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-a{
+a {
     color: white;
     text-decoration: none;
     list-style: none;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
-body{
+body {
     overflow-x: hidden;
     background-color: rgb(34, 34, 34);
 }
 
-button, input[type="button"]{
+button,
+input[type="button"] {
     -webkit-appearance: none;
 }
 
-.connect-btn{
+.connect-btn {
     -webkit-appearance: none;
     border: 0;
     position: relative;
@@ -39,115 +40,116 @@ button, input[type="button"]{
     transition: all 0.2s ease;
 }
 
-.main-not-connected .connect-btn{
+.main-not-connected .connect-btn {
     min-width: 230px;
 }
 
-.connect-btn:hover{
+.connect-btn:hover {
     transition: all 0.2s ease;
     background-color: #00567b;
 }
 
-.connect-btn:focus{
+.connect-btn:focus {
     background-color: rgb(85, 85, 85);
 }
 
 @keyframes opacity {
-    0%{
+    0% {
         opacity: 0;
         transform: scale(0.96);
     }
-    100%{
+    100% {
         opacity: 1;
         transform: scale(1);
     }
 }
 
 @keyframes blob {
-    0%{
+    0% {
         transform: scale(1);
         opacity: 0.95;
     }
-    50%{
+    50% {
         transform: scale(1.05);
         opacity: 1;
     }
-    100%{
+    100% {
         transform: scale(1);
         opacity: 0.95;
     }
 }
 
 @keyframes infoStatus {
-    0%{
+    0% {
         transform: scale(0.5);
         border-bottom: 10px solid transparent;
     }
-    100%{
+    100% {
         transform: scale(1);
         border-bottom: 10px solid rgb(201, 201, 201);
     }
 }
 
 @keyframes bookingcardpersonnal {
-    0%{
-        border: 5px dotted transparent; 
+    0% {
+        border: 5px dotted transparent;
     }
-    50%{
+    50% {
         border: 5px dotted rgb(0, 101, 164);
-
     }
-    100%{
+    100% {
         border: 5px dotted transparent;
     }
 }
 
-::placeholder{
+::placeholder {
     color: rgb(46, 46, 46);
     font-size: 1.1em;
 }
 
-.maxime{
+.maxime {
     font-size: 0.8em;
     display: block;
     margin-top: 10px;
     opacity: 0.6;
 }
 
-input{
+input {
     border: none;
     padding: 0;
     background-color: transparent;
 }
 
-input[type="date"], input[type="time"], input[type="number"]{
+input[type="date"],
+input[type="time"],
+input[type="number"] {
     color: rgb(46, 46, 46);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 1.1em;
 }
 
-input:focus{
+input:focus {
     outline: none;
     border: 0 none;
 }
 
-body{
+body {
     font-family: 'Poppins', sans-serif;
     color: white;
     width: 100%;
 }
 
-#booking-ctn{
+#booking-ctn {
     width: 100%;
 }
 
-.info-weather{
+.info-weather {
     display: none;
-    position: fixed; 
-    width: 100%; 
-    height: 100vh; 
-    background-color: rgba(0,0,0,0.95);
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -156,12 +158,12 @@ body{
     align-items: center;
 }
 
-.info-weather-open{
+.info-weather-open {
     display: flex !important;
     z-index: 2000;
 }
 
-.info-weather-inner{
+.info-weather-inner {
     z-index: 500;
     position: relative;
     width: 900px;
@@ -171,7 +173,7 @@ body{
     margin-top: -50px;
 }
 
-.close-info-weather{
+.close-info-weather {
     position: absolute;
     top: -25%;
     right: -2%;
@@ -186,20 +188,20 @@ body{
     cursor: pointer;
 }
 
-.close-info-weather:hover{
+.close-info-weather:hover {
     background-color: rgb(172, 29, 29);
     transition: all 0.2s ease;
 }
 
-div.waves{
+div.waves {
     width: 100%;
     bottom: 0;
     /* height: 100%;*/
     position: absolute;
     z-index: 100;
 }
-  
-svg{
+
+svg {
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -210,51 +212,53 @@ svg{
     animation-direction: alternate;
 }
 
-.info-temp-air, .info-temp-water, .info-swell{
+.info-temp-air,
+.info-temp-water,
+.info-swell {
     font-size: 2em;
-    font-weight:bold;
+    font-weight: bold;
 }
 
-.load-temp-info{
+.load-temp-info {
     font-size: 3.5em !important;
 }
 
-.degree-temp{
+.degree-temp {
     margin-left: 4px;
 }
 
-.info-weather-block{
+.info-weather-block {
     background-color: #2796bf;
     border: 5px solid rgb(50, 50, 50);
     width: 30%;
     height: 200px;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    justify-content:center;
-    padding:1.5em;
-    border-radius:10px;
+    justify-content: center;
+    padding: 1.5em;
+    border-radius: 10px;
 }
 
-.info-weather-block:nth-child(3){
+.info-weather-block:nth-child(3) {
     background-color: rgb(58, 102, 198);
 }
 
-.info-weather-block:last-child{
+.info-weather-block:last-child {
     background-color: rgb(33, 83, 189);
 }
 
-#main-ctn{
+#main-ctn {
     position: relative;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.main-not-connected{
+.main-not-connected {
     height: initial !important;
     min-height: initial !important;
 }
 
-.video{
+.video {
     position: absolute;
     bottom: 0;
     z-index: -1;
@@ -262,19 +266,19 @@ svg{
     min-height: 100%;
 }
 
-.child-main-ctn{
+.child-main-ctn {
     position: relative;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     height: 100vh;
     flex-direction: column;
 }
 
-.main-not-connected .child-main-ctn{
-  height: 800px;
+.main-not-connected .child-main-ctn {
+    height: 800px;
 }
 
-.navbar-ctn{
+.navbar-ctn {
     margin: 20px auto;
     width: 90%;
     padding: 20px 0px;
@@ -282,33 +286,33 @@ svg{
     justify-content: space-between;
 }
 
-.logo{
+.logo {
     display: flex;
 }
 
-.logo img{
+.logo img {
     width: 3em;
 }
 
-.weather{
+.weather {
     display: inline-flex;
-    justify-content:center; 
-    width:50px;
-    height:50px;
-    background-color: rgb(42,42,42);
-    border-radius:100%;
-    margin-left:30px;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(42, 42, 42);
+    border-radius: 100%;
+    margin-left: 30px;
     transition: all 0.2s ease;
     cursor: pointer;
 }
 
-.weather:hover{
+.weather:hover {
     background-color: rgb(233, 130, 3);
     transition: all 0.2s ease;
 }
 
-.profile-ctn{
-    background-color: rgb(42,42,42);
+.profile-ctn {
+    background-color: rgb(42, 42, 42);
     width: 50px;
     height: 50px;
     display: flex;
@@ -319,19 +323,19 @@ svg{
     transition: all 0.2s ease;
 }
 
-.profile-ctn:hover{
+.profile-ctn:hover {
     background-color: rgb(233, 130, 3);
     transition: all 0.2s ease;
 }
 
-.inner-profile-ctn{
+.inner-profile-ctn {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 2px;
 }
 
-.booking-manage{
+.booking-manage {
     cursor: pointer;
     border-radius: 50%;
     display: inline-flex;
@@ -343,59 +347,59 @@ svg{
     margin-right: 20px;
 }
 
-.inner-profile-ctn img{
+.inner-profile-ctn img {
     width: 1.2em;
 }
 
-.booking-text{
+.booking-text {
     height: 100%;
     width: 90%;
     margin: 40px auto;
     flex-direction: column;
 }
 
-.text-info{
-   margin-bottom: 40px;
+.text-info {
+    margin-bottom: 40px;
 }
 
-.main-not-connected .text-info{
+.main-not-connected .text-info {
     margin-bottom: 20px;
 }
 
-.text-info > h1{
+.text-info>h1 {
     font-size: 3.5em;
 }
 
-.text-info > h3{
+.text-info>h3 {
     font-size: 1.5em;
     font-weight: 500;
     opacity: 0.9;
 }
 
-.text-info > p{
+.text-info>p {
     font-weight: 300;
     font-size: 1.2em;
 }
 
-.inner-form{
+.inner-form {
     position: relative;
     animation: opacity 0.6s ease-out;
     display: flex;
     max-width: 1300px;
     background-color: rgb(232, 232, 232);
     border-radius: 20px;
-    box-shadow: 10px 10px 101px -26px rgba(0,0,0,0.57);
-    -webkit-box-shadow: 10px 10px 101px -26px rgba(0,0,0,0.57);
-    -moz-box-shadow: 10px 10px 101px -26px rgba(0,0,0,0.57);
+    box-shadow: 10px 10px 101px -26px rgba(0, 0, 0, 0.57);
+    -webkit-box-shadow: 10px 10px 101px -26px rgba(0, 0, 0, 0.57);
+    -moz-box-shadow: 10px 10px 101px -26px rgba(0, 0, 0, 0.57);
 }
 
-.inner-form > div:not(.inner-form div:last-child){
+.inner-form>div:not(.inner-form div:last-child) {
     padding: 25px;
     width: 100%;
     cursor: pointer;
 }
 
-.inner-form > div:not(.inner-form div:last-child)::after{
+.inner-form>div:not(.inner-form div:last-child)::after {
     position: absolute;
     z-index: 1000;
     content: '';
@@ -406,30 +410,30 @@ svg{
     background-color: rgb(184, 184, 184);
 }
 
-.inner-form > div:not(.inner-form div:last-child):hover{
+.inner-form>div:not(.inner-form div:last-child):hover {
     background-color: rgb(210, 210, 210);
     border-radius: 20px;
 }
 
-.inner-form > div > input:not(.inner-form div:last-child input:last-child){
+.inner-form>div>input:not(.inner-form div:last-child input:last-child) {
     margin-bottom: 10px;
     cursor: pointer;
 }
 
-.inner-form div label{
+.inner-form div label {
     color: rgb(169, 169, 169);
     margin-bottom: 4px;
 }
 
-.inner-form div input{
+.inner-form div input {
     width: 100%;
 }
 
-.btn-booking{
+.btn-booking {
     padding: 15px 20px 15px 15px;
 }
 
-.btn-booking button{
+.btn-booking button {
     border: 0;
     position: relative;
     padding: 20px 30px;
@@ -444,16 +448,16 @@ svg{
     transition: all 0.2s ease;
 }
 
-.btn-booking button:hover{
+.btn-booking button:hover {
     transition: all 0.2s ease;
     background-color: #00567b;
 }
 
-.btn-booking button:focus{
+.btn-booking button:focus {
     background-color: rgb(85, 85, 85);
 }
 
-.view-booking-ctn{
+.view-booking-ctn {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -461,7 +465,7 @@ svg{
     margin-top: 20px;
 }
 
-.view-booking-inner{
+.view-booking-inner {
     padding: 30px;
     width: 100%;
     display: flex;
@@ -469,7 +473,7 @@ svg{
     background-color: rgb(34, 34, 34);
 }
 
-.view-booking-ctn input{
+.view-booking-ctn input {
     padding: 20px 50px;
     border-radius: 10px;
     color: rgb(199, 199, 199);
@@ -481,13 +485,13 @@ svg{
     transition: all 0.2s ease;
 }
 
-.view-booking-ctn input:hover{
+.view-booking-ctn input:hover {
     color: rgb(233, 233, 233);
     transition: all 0.2s ease;
     background-color: #2b2b2b;
 }
 
-#list-booking-ctn{
+#list-booking-ctn {
     padding-bottom: 60px;
     background-color: rgb(34, 34, 34);
     width: 100%;
@@ -496,37 +500,37 @@ svg{
     justify-content: center;
 }
 
-.list-booking-inner{
-  display: inline-flex;
-  flex-wrap: wrap;
-  width: 1200px;
-  margin: 0px auto;
+.list-booking-inner {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 1200px;
+    margin: 0px auto;
 }
 
-.booking-card{
-  position: relative;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 20px;
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-  width: 380px;
-  background-color: #2b2b2b;
-  border-radius: 10px;
-  padding: 20px;
-  border: 5px solid rgb(50, 50, 50);
-  transition: box-shadow 0.5s ease;
+.booking-card {
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    padding: 20px;
+    border: 5px solid rgb(50, 50, 50);
+    transition: box-shadow 0.5s ease;
 }
 
-.booking-card:hover{
+.booking-card:hover {
     transition: all 0.2s ease;
-    -webkit-box-shadow: 5px 9px 33px 7px rgba(0,0,0,0.17); 
-    box-shadow: 5px 9px 33px 7px rgba(0,0,0,0.17);
+    -webkit-box-shadow: 5px 9px 33px 7px rgba(0, 0, 0, 0.17);
+    box-shadow: 5px 9px 33px 7px rgba(0, 0, 0, 0.17);
     border: 5px solid rgb(63, 63, 63);
 }
 
-.status-msg{
+.status-msg {
     display: none;
     justify-content: center;
     flex-direction: column;
@@ -545,27 +549,27 @@ svg{
     z-index: 1000;
 }
 
-.info-toggle{
+.info-toggle {
     display: flex;
     animation: infoStatus 0.2s ease;
     animation-fill-mode: forwards;
 }
 
-.bold-status{
+.bold-status {
     font-weight: bold;
 }
 
-.card-info-people{
-  background-color: #6a6a6a;
-  display: flex;
-  border: 5px solid transparent;
-  justify-content: center;
-  flex-direction: column;
-  padding: 10px 20px;
-  border-radius: 10px;
+.card-info-people {
+    background-color: #6a6a6a;
+    display: flex;
+    border: 5px solid transparent;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 
-.card-info-booking{
+.card-info-booking {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -573,46 +577,47 @@ svg{
     font-size: 1.2em;
 }
 
-.card-info-people span:first-child{
+.card-info-people span:first-child {
     font-size: 1.4em;
     color: rgb(244, 244, 244);
 }
 
-.card-info-people span:last-child{
+.card-info-people span:last-child {
     font-size: 1em;
     color: rgb(213, 213, 213);
 }
 
-.date-booking{
+.date-booking {
     display: flex;
     justify-content: space-around;
     font-size: 1em;
     margin-top: -20px;
 }
 
-.date-booking span{
+.date-booking span {
     padding: 10px;
     border-radius: 10px;
     margin: auto;
     text-align: center;
 }
 
-.date-booking:last-child{
+.date-booking:last-child {
     font-weight: 300 !important;
     margin-top: -15px;
     font-size: 0.9em;
 }
 
-.date-checkin,.date-checkout{
+.date-checkin,
+.date-checkout {
     font-weight: bold;
     font-size: 0.95em;
 }
 
-.date-checkin{
+.date-checkin {
     opacity: 0.9;
 }
 
-.card-info-booking > span:last-child{
+.card-info-booking>span:last-child {
     display: block;
     margin-top: -10px;
     text-align: center;
@@ -620,7 +625,7 @@ svg{
     font-weight: bold;
 }
 
-.card-info-booking > span:last-child span{
+.card-info-booking>span:last-child span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -632,7 +637,7 @@ svg{
     animation: blob 1s ease infinite;
 }
 
-.title-info-booking{
+.title-info-booking {
     margin-bottom: 25px;
     font-size: 0.8em;
     opacity: 0.8;
@@ -642,24 +647,24 @@ svg{
     text-align: center;
 }
 
-.user-icon-card{
+.user-icon-card {
     width: 1.3em;
     position: relative;
     top: 2px;
     margin-right: 10px;
 }
 
-.unique-card-color{
+.unique-card-color {
     border: 5px dotted transparent;
     animation: bookingcardpersonnal 1.5s ease-in infinite;
     background-color: #0083bb !important;
 }
 
-.unique-people-number{
+.unique-people-number {
     background-color: #0083bb !important;
 }
 
-.no-booking{
+.no-booking {
     width: 700px;
     background-color: rgb(41, 41, 41);
     border-radius: 8px;
@@ -668,18 +673,18 @@ svg{
     justify-content: center;
     margin: 20px auto;
     padding: 20px 50px;
-    -webkit-box-shadow: 8px 8px 20px 7px rgba(0,0,0,0.15); 
-    box-shadow: 8px 8px 20px 7px rgba(0,0,0,0.15);  
+    -webkit-box-shadow: 8px 8px 20px 7px rgba(0, 0, 0, 0.15);
+    box-shadow: 8px 8px 20px 7px rgba(0, 0, 0, 0.15);
     border: 2px solid transparent;
     transition: border 0.2s ease;
 }
 
-.no-booking:hover{
+.no-booking:hover {
     border: 2px solid rgb(63, 63, 63);
     transition: border 0.2s ease;
 }
 
-.no-booking p{
+.no-booking p {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -688,12 +693,12 @@ svg{
     color: rgb(210, 210, 210);
 }
 
-.no-booking-icon{
+.no-booking-icon {
     width: 2.1em;
     margin-right: 20px;
 }
 
-.delete-booking{
+.delete-booking {
     cursor: pointer;
     z-index: 1000;
     display: flex;
@@ -705,29 +710,29 @@ svg{
     background-color: rgb(157, 157, 157);
     right: -15px;
     border-radius: 50%;
-    top: -15px; 
+    top: -15px;
     transition: all 0.2s ease-out;
     opacity: 0.9;
 }
 
-.delete-booking:hover{
+.delete-booking:hover {
     transition: all 0.2s ease;
     opacity: 1;
     background-color: rgb(172, 41, 41);
 }
 
-.delete-booking img{
+.delete-booking img {
     width: 1.5em;
 }
 
-.status{
+.status {
     position: absolute;
     border-radius: 10px 10px 0px 0px;
     background-color: rgb(233, 130, 3);
     display: flex;
     justify-content: center;
-    align-items: center ;
-    left:0;
+    align-items: center;
+    left: 0;
     right: 30px;
     height: 40px;
     width: 40%;
@@ -735,19 +740,19 @@ svg{
     margin: auto;
 }
 
-.approved{
+.approved {
     background-color: rgb(11, 106, 11);
 }
 
-.rejected{
+.rejected {
     background-color: rgb(211, 41, 41);
 }
 
-.passed{
+.passed {
     background-color: rgb(99, 99, 99);
 }
 
-.info-booking-status{
+.info-booking-status {
     width: 100%;
     padding: 10px 0;
     margin-bottom: 20px;
@@ -757,33 +762,33 @@ svg{
     background-color: rgb(50, 50, 50);
 }
 
-.status-green{
+.status-green {
     border-bottom: 10px solid green;
 }
 
-.status-orange{
+.status-orange {
     border-bottom: 10px solid rgb(233, 130, 3);
 }
 
-.status-red{
+.status-red {
     border-bottom: 10px solid rgb(211, 41, 41);
 }
 
-.status-grey{
+.status-grey {
     border-bottom: 10px solid grey;
 }
 
-.info-booking-status span{
+.info-booking-status span {
     font-weight: bold;
     font-size: 1.2em;
     text-transform: uppercase;
 }
 
-.update-time-status{
+.update-time-status {
     border-radius: 0px 10px 0px 0px;
     background-color: rgb(30, 179, 20);
     display: inline-flex;
-    justify-content: center;        
+    justify-content: center;
     align-items: center;
     padding: 5px 15px;
     margin-left: 10px;
@@ -793,19 +798,19 @@ svg{
     height: 100%;
 }
 
-.icon{
+.icon {
     width: 8px;
 }
 
-.red-status{
+.red-status {
     background-color: rgb(238, 10, 10);
 }
 
-.orange-status{
+.orange-status {
     background-color: orange;
 }
 
-.grey-status{
+.grey-status {
     background-color: grey;
 }
 
@@ -819,150 +824,137 @@ svg{
     .child-main-ctn {
         height: initial;
     }
-
-    .text-info > h1 {
-     font-size: 2.6em;
+    .text-info>h1 {
+        font-size: 2.6em;
     }
-
 }
 
 @media screen and (min-height: 1200px) {
-    #main-ctn{
+    #main-ctn {
         max-height: 1200px;
+    }
+    .child-main-ctn {
+        height: initial;
     }
 }
 
 @media screen and (max-width: 1500px) {
-    .inner-form > div:not(.inner-form div:last-child){
+    .inner-form>div:not(.inner-form div: last-child) {
         padding: 30px 15px;
         width: 100%;
         font-size: 1em;
     }
-    .btn-booking button{
+    .btn-booking button {
         padding: 10px 15px;
     }
 }
 
 @media screen and (max-width: 1200px) {
-    .list-booking-inner{
+    .list-booking-inner {
         width: 800px;
         margin: 50px auto;
-      }
-      .view-booking-inner input{
+    }
+    .view-booking-inner input {
         padding: 20px 40px;
-      }
+    }
 }
 
 @media screen and (max-width: 1120px) {
-    .btn-booking button{
+    .btn-booking button {
         padding: 20px 20px;
     }
-    input[type="date"], input[type="time"], input[type="number"]{
+    input[type="date"],
+    input[type="time"],
+    input[type="number"] {
         font-size: 0.90em;
     }
-    .inner-form div label{
+    .inner-form div label {
         font-size: 0.90em;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .close-info-weather{
+    .close-info-weather {
         right: 6%;
         top: -12%;
     }
-
-    .info-temp-water, .info-temp-air, .info-swell {
+    .info-temp-water,
+    .info-temp-air,
+    .info-swell {
         font-size: 3em;
     }
-
-    .info-weather-inner{
+    .info-weather-inner {
         flex-direction: column;
     }
-
-    .info-weather-block{
+    .info-weather-block {
         align-items: center;
         margin-bottom: 20px;
         height: 140px;
         width: 80%;
     }
-    
-
-    input[type="date"], input[type="time"], input[type="number"]{
+    input[type="date"],
+    input[type="time"],
+    input[type="number"] {
         font-size: 1em;
     }
-
-    .inner-form div label{
+    .inner-form div label {
         font-size: 1em;
     }
-
     .video {
         display: none;
     }
-    
     #main-ctn {
         background: url("../assets/img/wave.webp");
         background-size: cover;
         background-repeat: no-repeat;
         height: initial;
     }
-
-    .view-booking-inner{
+    .view-booking-inner {
         position: unset;
         margin-top: 40px;
         padding: 30px 10px 0px 10px;
     }
-
-    .view-booking-inner a, .view-booking-inner input{
+    .view-booking-inner a,
+    .view-booking-inner input {
         width: 100%;
     }
-
-    .view-booking-inner input{
+    .view-booking-inner input {
         padding: 20px;
         font-size: 1.2em;
     }
-
-    .inner-form{
+    .inner-form {
         display: block;
     }
-
-    .inner-form > div:not(.inner-form div:last-child){
+    .inner-form>div:not(.inner-form div:last-child) {
         padding: 30px;
     }
-
-    .booking-text{
+    .booking-text {
         margin: auto;
     }
-    
-    .btn-booking button{
+    .btn-booking button {
         padding: 20px 20px;
         width: 100%;
     }
-
-    .text-info{
+    .text-info {
         margin-bottom: 40px;
-     }
-     
-     .text-info > h1{
-         font-size: 2.5em;
-         line-height: 1.2em;
-         margin-top: 5px;
-     }
-     
-     .text-info > h3{
-         font-size: 1.2em;
-     }
-     
-     .text-info > p{
+    }
+    .text-info>h1 {
+        font-size: 2.5em;
+        line-height: 1.2em;
+        margin-top: 5px;
+    }
+    .text-info>h3 {
+        font-size: 1.2em;
+    }
+    .text-info>p {
         font-size: 1.2em;
         margin-top: 10px;
-     }
-
-     #list-booking-ctn{
+    }
+    #list-booking-ctn {
         display: flex;
         justify-content: center;
     }
-    
-    .list-booking-inner{
+    .list-booking-inner {
         flex-wrap: wrap;
         display: flex;
         justify-content: center;
@@ -970,95 +962,82 @@ svg{
         margin: 0px auto;
         padding: 10px;
     }
-
     .child-main-ctn {
         height: initial;
     }
-
-    .main-not-connected{
+    .main-not-connected {
         min-height: initial !important;
     }
-
-    .main-not-connected .view-booking-inner{
+    .main-not-connected .view-booking-inner {
         margin: 0;
     }
-
-    .main-not-connected .view-booking-ctn{
+    .main-not-connected .view-booking-ctn {
         margin: 0;
     }
-
-    .main-not-connected .child-main-ctn{
+    .main-not-connected .child-main-ctn {
         height: initial !important;
     }
-
-    .main-not-connected .child-main-ctn form button{
+    .main-not-connected .child-main-ctn form button {
         width: 100%;
     }
-
-    .main-not-connected .view-booking-inner{
+    .main-not-connected .view-booking-inner {
         width: 90%;
         margin-top: 20px;
         margin-bottom: 20px;
         background: transparent;
         padding: 0;
     }
-
-    .main-not-connected .view-booking-inner input{
-        background-color:rgb(233, 130, 3);
+    .main-not-connected .view-booking-inner input {
+        background-color: rgb(233, 130, 3);
         color: white;
     }
-
-    .main-not-connected .view-booking-inner input:hover{
-        background-color:rgb(157, 96, 21);
+    .main-not-connected .view-booking-inner input:hover {
+        background-color: rgb(157, 96, 21);
     }
 }
 
 @media screen and (max-width: 600px) {
-    .close-info-weather{
+    .close-info-weather {
         top: initial;
         bottom: -26%;
         right: 0;
         left: 50%;
-        border-radius:10px;
+        border-radius: 10px;
         cursor: pointer;
     }
 }
 
 @media screen and (max-width: 390px) {
-    .text-info > h1{
+    .text-info>h1 {
         font-size: 2.1em;
     }
-
-    .close-info-weather{
+    .close-info-weather {
         width: 40%;
     }
-
-    .info-weather-block{
+    .info-weather-block {
         height: 100px;
     }
-
-    .info-temp-water, .info-temp-air, .info-swell{
+    .info-temp-water,
+    .info-temp-air,
+    .info-swell {
         font-size: 2em;
     }
-
-    .status{
+    .status {
         width: 50%;
     }
-
-    .info-booking-status{
+    .info-booking-status {
         padding: 15px 0;
     }
-
-    .info-booking-status span{
+    .info-booking-status span {
         font-size: 1em;
     }
 }
 
-@media screen and (max-width: 312px ) {
-    .info-weather-block > span:first-child{
+@media screen and (max-width: 312px) {
+    .info-weather-block>span:first-child {
         font-size: 0.9em;
     }
-    .info-weather-block > span:last-child{
+    .info-weather-block>span:last-child {
         font-size: 1.2em;
     }
     .info-weather-block {
@@ -1066,8 +1045,8 @@ svg{
     }
 }
 
-@media screen and (max-height: 500px ) {
-    .child-main-ctn{
+@media screen and (max-height: 500px) {
+    .child-main-ctn {
         height: initial;
     }
 }

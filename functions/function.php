@@ -6,7 +6,7 @@ function connectDB()
     $servername = "localhost";
     $username = "root";
     // $password = "root";
-    $password = "";
+    $password = "root";
     $dbname = "booking";
     // $servername = "localhost";
     // $username = "olym5493_maxime";
