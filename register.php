@@ -3,15 +3,21 @@
 require_once("functions/function.php"); 
 
 if(isset($_POST['submit'])){
-    if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username-register']) && isset($_POST['password-register'])){
+    if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email-register']) && isset($_POST['username-register']) && isset($_POST['password-register'])){
         $firstnameRegister = htmlspecialchars($_POST['firstname']);
         $lastnameRegister = htmlspecialchars($_POST['lastname']);
+        $email = htmlspecialchars($_POST['email-register']);
         $usernameRegister = htmlspecialchars($_POST['username-register']);
         $passwordRegister = htmlspecialchars($_POST['password-register']);
-        if(checkEmptyFormRegister($firstnameRegister,$lastnameRegister,$usernameRegister,$passwordRegister)){
+        if(isset($_POST['notification'])){
+            $notification = 1;
+        } else {
+            $notification = 0;
+        }
+        if(checkEmptyFormRegister($firstnameRegister,$lastnameRegister,$email,$usernameRegister,$passwordRegister)){
             $firstnameRegister = strtoupper(substr($firstnameRegister,0,1)) . strtolower(substr($firstnameRegister,1));
             $lastnameRegister = strtoupper(substr($lastnameRegister,0,1)) . strtolower(substr($lastnameRegister,1));
-            insertUser($usernameRegister,$firstnameRegister,$lastnameRegister,$passwordRegister);
+            insertUser($usernameRegister,$firstnameRegister,$lastnameRegister,$email,$notification,$passwordRegister);
             header("Location: " . "login.php?register=valid");
         }
     } else {
@@ -46,8 +52,13 @@ if(isset($_POST['submit'])){
         <form method="POST" action="">
         <input type="text" id="firstname" name="firstname" placeholder="prénom" autocomplete="off" class="<?php if(isset($_GET["input0"]) && ($_GET["input0"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($firstnameRegister)){ echo $firstnameRegister; } ?>">
         <input type="text" id="lastname" name="lastname" placeholder="nom" autocomplete="off" class="<?php if(isset($_GET["input1"]) && ($_GET["input1"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($lastnameRegister)){ echo $lastnameRegister; } ?>">
-        <input type="text" id="username-register" name="username-register" placeholder="nom d'utilisateur" autocomplete="off" class="<?php if(isset($_GET["input2"]) && ($_GET["input2"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($usernameRegister)){ echo $usernameRegister; } ?>">
-        <input type="password" id="password-register" name="password-register" placeholder="mot de passe" autocomplete="off" class="<?php if(isset($_GET["input3"]) && ($_GET["input3"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($passwordRegister)){ echo $passwordRegister; } ?>">
+        <input type="email" id="email" name="email-register" placeholder="email" autocomplete="off" class="<?php if(isset($_GET["input2"]) && ($_GET["input2"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($email)){ echo $email; } ?>">
+        <input type="text" id="username-register" name="username-register" placeholder="nom d'utilisateur" autocomplete="off" class="<?php if(isset($_GET["input3"]) && ($_GET["input3"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($usernameRegister)){ echo $usernameRegister; } ?>">
+        <input type="password" id="password-register" name="password-register" placeholder="mot de passe" autocomplete="off" class="<?php if(isset($_GET["input4"]) && ($_GET["input4"] == "error")){ echo 'error'; } ?>" value="<?php if(isset($passwordRegister)){ echo $passwordRegister; } ?>">
+        <div class="notifs-group">
+            <input type="checkbox" id="notification" name="notification" value="no" <?php if(isset($notification) && $notification === 1){ echo "checked"; } ?>>
+            <label for="notification" style="margin-left: 10px;font-family:Poppins, sans-serif;font-size:0.9em;">Recevoir les notifications par email</label>
+        </div>
         <input type="submit" value="S'inscrire" name="submit">
         </form>
         <!-- Remind Passowrd -->

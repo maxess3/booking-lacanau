@@ -107,6 +107,12 @@ input[type="button"] {
     font-size: 1.1em;
 }
 
+.info-message-index,
+.message-ajax {
+    position: relative;
+    z-index: 10000 !important;
+}
+
 .maxime {
     font-size: 0.8em;
     display: block;

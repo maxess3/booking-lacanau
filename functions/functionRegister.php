@@ -2,19 +2,20 @@
 
 require_once('function.php');
 
-if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username-register']) && isset($_POST['password-register'])) {
+if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email-register']) && isset($_POST['username-register']) && isset($_POST['password-register']) && isset($_POST['notification'])) {
     $firstnameRegister = $_POST['firstname'];
     $lastnameRegister = $_POST['lastname'];
+    $emailRegister = $_POST['email-register'];
     $usernameRegister = $_POST['username-register'];
     $passwordRegister = $_POST['password-register'];
-    if (checkEmptyFormRegister($firstnameRegister, $lastnameRegister, $usernameRegister, $passwordRegister)) {
+    $notification = $_POST['notification'];
+    if (checkEmptyFormRegister($firstnameRegister, $lastnameRegister, $email, $usernameRegister, $passwordRegister)) {
         $firstnameRegister = strtoupper(substr($firstnameRegister, 0, 1)) . strtolower(substr($firstnameRegister, 1));
         $lastnameRegister = strtoupper(substr($lastnameRegister, 0, 1)) . strtolower(substr($lastnameRegister, 1));
-        insertUser($usernameRegister, $firstnameRegister, $lastnameRegister, $passwordRegister);
+        insertUser($usernameRegister, $firstnameRegister, $lastnameRegister, $emailRegister, $notification, $passwordRegister);
         header("Location: " . "../login.php?register=valid");
     } else {
         header("Location: " . "../register.php?error=blank");
-        $firstnameRegister = "iji";
     }
 } else {
     header("Location: " . "../register.php?error=blank");

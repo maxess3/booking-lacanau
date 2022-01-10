@@ -1,17 +1,21 @@
 <?php
 
+require_once("verification.php");
+
+require_once("mail.php");
+
 function connectDB()
 {
-    // $servername = "localhost:8889";
-    $servername = "localhost";
-    $username = "root";
-    // $password = "root";
-    $password = "root";
-    $dbname = "booking";
+    // // $servername = "localhost:8889";
     // $servername = "localhost";
-    // $username = "olym5493_maxime";
-    // $password = "i+NJRvB.fgWS";
-    // $dbname = "olym5493_booking";
+    // $username = "root";
+    // // $password = "root";
+    // $password = "root";
+    // $dbname = "booking";
+    $servername = "localhost";
+    $username = "olym5493_maxime";
+    $password = "i+NJRvB.fgWS";
+    $dbname = "olym5493_booking";
     try {
         $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,57 +23,6 @@ function connectDB()
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
-}
-
-function checkEmptyFormLogin($username, $password)
-{
-    if (empty($username) && empty($password)) {
-        $_GET["error"] = "blank";
-        return false;
-    } else if (empty($username)) {
-        $_GET["error"] = "emptyUsername";
-        return false;
-    } else if (empty($password)) {
-        $_GET["error"] = "emptyPassword";
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function checkEmptyFormRegister($firstname, $lastname, $username, $password)
-{
-    $args = func_get_args();
-    $count = 0;
-
-    for ($i = 0; $i < count($args); $i++) {
-        if (empty($args[$i])) {
-            $count = $count + 1;
-            $_GET["input$i"] = "error";
-        }
-    }
-
-    if ($count > 0) {
-        $_GET["error"] = "blank";
-        return false;
-    }
-
-    return true;
-}
-
-function checkEmptyFormBooking($people, $dateCheckIn, $hourCheckIn, $dateCheckOut, $hourCheckOut)
-{
-    if (empty($people) || empty($dateCheckIn) || empty($hourCheckIn) || empty($dateCheckOut) || empty($hourCheckOut)) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function validateDate($date, $format = 'Y-m-d')
-{
-    $d = DateTime::createFromFormat($format, $date);
-    return $d && $d->format($format) === $date;
 }
 
 function login($username, $password)
@@ -87,17 +40,17 @@ function login($username, $password)
                     $_SESSION["username"] = $row["username"];
                     $_SESSION["firstname"] = $row["firstname"];
                     $_SESSION["lastname"] = $row["lastname"];
+                    $_SESSION["email"] = $row["email"];
                     $_SESSION["password"] = $row["password"];
                     $_SESSION["admin"] = $row["admin"];
+                    $_SESSION["notification"] = $row["notification"];
                     header("Location: " . "index.php");
                 } else {
                     $_GET["error"] = "wrongLogin";
-                    // header("Location: " . "../login.php?error=wrongLogin");
                 }
             }
         } else {
             $_GET["error"] = "wrongLogin";
-            // header("Location: " . "../login.php?error=wrongLogin");
         }
         $stmt->closeCursor();
     } catch (Exception $e) {
@@ -107,18 +60,18 @@ function login($username, $password)
     }
 }
 
-function insertUser($username, $firstname, $lastname, $password)
+function insertUser($username, $firstname, $lastname, $email, $notification, $password)
 {
     $db = connectDB();
     $password = password_hash($password, PASSWORD_DEFAULT);
     try {
-        $sql = "INSERT INTO User (id, username, firstname, lastname, password) VALUES (NULL, ?, ?, ?, ?)";
+        $sql = "INSERT INTO User (id, username, firstname, lastname, email, notification, password) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($username, $firstname, $lastname, $password));
+        $stmt->execute(array($username, $firstname, $lastname, $email, $notification, $password));
         $stmt->closeCursor();
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "../register.php?error=sameID");
+        header("Location: " . "/booking-lacanau/register.php");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
@@ -133,9 +86,6 @@ function insertBooking($idUser, $people, $dateCheckIn, $dateCheckOut, $hourCheck
         $stmt = $db->prepare($sql);
         $stmt->execute(array($people, $dateCheckIn, $dateCheckOut, $hourCheckIn, $hourCheckOut, $idUser));
         $stmt->closeCursor();
-        if (sendMail($people, $username, $firstname, $lastname, $dateCheckIn, $dateCheckOut)) {
-        } else {
-        }
     } catch (Exception $e) {
         sleep(1);
         header("Location: " . "../index.php?error=globalErrorBooking");
@@ -164,11 +114,50 @@ function updateStatusBooking($status, $idAppt)
     $db = connectDB();
     try {
         $sql = "UPDATE Appartment a 
-       SET a.status = ?, 
-       a.updated_at = NOW() 
-       WHERE a.id = ?";
+        SET a.status = ?, 
+        a.updated_at = NOW() 
+        WHERE a.id = ?;";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($status, $idAppt));
+        $stmt->closeCursor();
+        consentUser($status,$idAppt);
+    } catch (Exception $e) {
+        sleep(1);
+        header("Location: " . "../index.php?error=globalErrorBooking");
+        throw new Exception("Registration error" . $e->getMessage(), 1);
+    }
+}
+
+function consentUser($status,$idAppt)
+{
+    $db = connectDB();
+    try {
+        $sql = "SELECT *
+        FROM User u
+        LEFT JOIN Book b
+        ON u.id = b.id_user
+        LEFT JOIN Appartment a
+        ON a.id = b.id_appartment
+        WHERE u.notification = 1
+        AND a.id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($idAppt));
+        if($stmt->rowCount() > 0){
+            while($row = $stmt->fetch()){
+                $people = $row['people'];
+                $username = $row['username'];
+                $firstname = $row['firstname'];
+                $lastname = $row['lastname'];
+                $dateCheckIn = $row['date_checkin'];
+                $dateCheckOut = $row['date_checkout'];
+                $email = $row['email'];
+                $status = $row['status'];
+            }
+            if($_SESSION["firstname"]){
+                $firstnameAdmin = $_SESSION["firstname"];
+                sendUserUpdateBookingMail($people, $username, $firstname, $lastname, $dateCheckIn, $dateCheckOut, $email, $status, $firstnameAdmin);
+            }
+        }
         $stmt->closeCursor();
     } catch (Exception $e) {
         sleep(1);
@@ -270,11 +259,14 @@ function getBooking($sessionUsername, $status, $bookingPassed = false)
                 if ($i == 0 && $status == "0") {
                     echo "<div class=\"info-booking-status status-orange\" id=\"pending-list\"><span>Réservations mises en attente :</span></div>";
                 }
-                if ($i == 0 && $status == "1") {
+                if ($i == 0 && $status == "1" && !$bookingPassed) {
                     echo "<div class=\"info-booking-status status-green\"><span>Réservations approuvées :</span></div>";
                 }
                 if ($i == 0 && $status == "2") {
                     echo "<div class=\"info-booking-status status-red\"><span>Réservations annulées :</span></div>";
+                }
+                if ($i == 0 && $status == "1" && $bookingPassed) {
+                    echo "<div class=\"info-booking-status status-grey\"><span>Réservations passées :</span></div>";
                 }
                 if ($sessionUsername != false && ($sessionUsername == $username)) {
                     if ($status == "0") {
@@ -540,7 +532,7 @@ function getBookingAdmin($status)
 {
     $db = connectDB();
     try {
-        $sql = "SELECT a.id, people, date_checkin, date_checkout, status, username, firstname, lastname 
+        $sql = "SELECT a.id, people, date_checkin, date_checkout, created_at, status, username, firstname, lastname 
        FROM Book b 
        INNER JOIN Appartment a 
        ON b.id_appartment = a.id 
@@ -558,6 +550,7 @@ function getBookingAdmin($status)
                 $dateCheckInFR = getDateFR($dateCheckIn);
                 $dateCheckOut = $row['date_checkout'];
                 $dateCheckOutFR = getDateFR($dateCheckOut);
+                $created = getDateFR($row['created_at']);
                 $firstname = $row['firstname'];
                 $lastname = $row['lastname'];
                 $username = $row['username'];
@@ -568,8 +561,12 @@ function getBookingAdmin($status)
                     <td data-label=\"Username\">$username</td>
                     <td data-label=\"DateCheckIn\">$dateCheckInFR</td>
                     <td data-label=\"DateCheckOut\">$dateCheckOutFR</td>
-                    <td data-label=\"Created\">03/01/2016 15:00</td>
-                    <td data-label=\"Status\" class=\"status\"><span><img src=\"assets/img/valid.png\" alt=\"Accepter la réservation\" class=\"accepted modify\"></span><span><img src=\"assets/img/pending.svg\" alt=\"Mettre en attente\" class=\"pending modify\"></span><span><img src=\"assets/img/rejected.svg\" style=\"width:17px!important;position:relative;top:3px;\" alt=\"Annuler la réservation\" class=\"rejected modify\"></span></td>
+                    <td data-label=\"Created\">$created</td>
+                    <td data-label=\"Status\" class=\"status\">
+                        <span><img src=\"assets/img/valid.png\" alt=\"Accepter la réservation\" class=\"accepted modify\"></span>
+                        <span><img src=\"assets/img/pending.svg\" alt=\"Mettre en attente\" class=\"pending modify\"></span>
+                        <span><img src=\"assets/img/rejected.svg\" style=\"width:17px!important;position:relative;top:3px;\" alt=\"Annuler la réservation\" class=\"rejected modify\"></span>
+                    </td>
               </tr>";
             }
         }
@@ -679,31 +676,4 @@ function getDateFR($date)
 function getTimeFR($time)
 {
     return str_replace(":", "h", date('G:i', strtotime($time)));
-}
-
-function sendMail($people, $username, $firstname, $lastname, $dateCheckIn, $dateCheckOut)
-{
-    $dateCheckIn = getDateFR($dateCheckIn);
-    $dateCheckOut = getDateFR($dateCheckOut);
-    $to = "maxschell31@gmail.com";
-    $subject = "⚠️ Réservation Lacanau de $firstname $lastname en attente, $dateCheckIn - $dateCheckOut";
-    $message = "<!DOCTYPE html>
-    <html lang=\"fr\">
-    <head>
-        <meta charset=\"UTF-8\">
-        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-    </head>
-    <body>
-        <p>Réservation en attente de : $firstname $lastname <span style=\"color: red;\">(@$username)</span></p>
-        <p>Réservation pour : $people personne(s)</p>
-        <p>Date de début du séjour : $dateCheckIn</p>
-        <p>Date de départ du séjour : $dateCheckOut</p>
-        <a href=\"https://cookierico.com/admin\"><button style=\"-webkit-appearance: none;border: 0;padding: 15px 40px;border-radius: 100px;background-color: #0083bb;cursor: pointer !important;color: white;font-weight: bold;font-size: 1.2em;\"</button>Voir la réservation</a>
-    </body>
-    </html>";
-    $headers = "MIME-Version: 1.0" . "\r\n";
-    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    $headers .= 'From: <Reservation@no-reply.com>' . "\r\n";
-    return mail($to, $subject, $message, $headers);
 }

@@ -1,47 +1,49 @@
-@keyframes appear{
-    0%{ 
-      transform: translateY(-100px);
-      opacity: 0;
+@keyframes appear {
+    0% {
+        opacity: 0;
     }
-    20%{
-      transform: translateY(0px);
-      opacity: 1;
-    }
-    80%{
+    10% {
         opacity: 1;
     }
-    100%{
+    80% {
+        opacity: 1;
+    }
+    99% {
+        transform: translateY(0px);
+    }
+    100% {
         opacity: 0;
-        z-index: 0;
+        transform: translateY(-100px);
     }
 }
 
-.error{
+.error {
     border: 2px solid red !important;
 }
 
-.info-icon{
+.info-icon {
     width: 25px;
     margin-left: 20px;
     margin-bottom: 4px;
 }
-  
-.info-message{
+
+.info-message {
     animation: appear 4.5s ease forwards;
     display: flex !important;
     justify-content: center;
     position: fixed;
     z-index: 2000;
-    top: 20px;
-    border-radius: 10px;
+    top: 0px;
     background-color: rgb(240, 240, 240);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px 25px;
+    width: 100%;
 }
 
-.info-message-index,.message-ajax-anim{
+.info-message-index,
+.message-ajax-anim {
     animation: appear 4.5s ease forwards;
     width: 100%;
     color: black;
@@ -57,7 +59,7 @@
     padding: 20px 25px;
 }
 
-.info-message p{
+.info-message p {
     color: #393939;
     padding: 0;
     text-align: center;
@@ -65,7 +67,7 @@
     font-weight: bold;
 }
 
-.register-message{
+.register-message {
     display: block !important;
     position: absolute;
     z-index: 2000;
@@ -79,7 +81,7 @@
     padding: 0;
 }
 
-.register-message p{
+.register-message p {
     padding: 0;
     text-align: center;
     margin-top: 10px;

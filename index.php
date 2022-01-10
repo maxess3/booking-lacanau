@@ -14,7 +14,9 @@ if(isset($_POST["submit"])){
         $username = $_SESSION['username'];
         $firstname = $_SESSION['firstname'];
         $lastname = $_SESSION['lastname'];
+        $email = $_SESSION['email'];
         $password = $_SESSION['password'];
+        $notification = $_SESSION['notification'];
         if(isset($_POST['people']) && isset($_POST['date-checkin']) && isset($_POST['hour-checkin']) && isset($_POST['date-checkout']) && isset($_POST['hour-checkout'])){
             $people = htmlspecialchars($_POST['people']);
             $dateCheckIn = htmlspecialchars($_POST['date-checkin']);
@@ -28,6 +30,8 @@ if(isset($_POST["submit"])){
                             if($dateCheckIn < $dateCheckOut){
                                 if(notBooked($dateCheckIn,$dateCheckOut)){
                                     insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$username,$firstname,$lastname);
+                                    sendUserCreateBookingMail($people, $firstname, $email, $dateCheckIn, $dateCheckOut);
+                                    sendAdminCreateBookingMail($people, $username, $firstname, $lastname, $dateCheckIn, $dateCheckOut);
                                     $_GET["register"] = "bookingSuccess";
                                 } else {
                                     $_GET["error"] = "booked";
@@ -234,7 +238,7 @@ if(isset($_POST["submit"])){
                         <p>Bienvenue sur le site de réservation de l'appartement 669 à Lacanau.<br/><span class="maxime">Créé par Maxime Schellenberger</span></p>
                     </div>
                     <form action="" method="POST">
-                            <?= isset($_SESSION['id']) ? $searchBarConnected : $searchBarNotConnected ?>
+                        <?= isset($_SESSION['id']) ? $searchBarConnected : $searchBarNotConnected ?>
                     </form>
                 </div>
                 <div class="view-booking-ctn">
