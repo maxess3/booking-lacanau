@@ -109,6 +109,28 @@ function deleteBooking($idAppartment)
     }
 }
 
+function deleteMyBookings($idAppartment)
+{
+    $db = connectDB();
+    try {
+        $sql = "DELETE Appartment
+        From Appartment
+        INNER JOIN Book
+        ON Appartment.id = Book.id_appartment
+        INNER JOIN User
+        ON Book.id_user = User.id
+        WHERE User.id = 12";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($idAppartment));
+        $stmt->closeCursor();
+        return true;
+    } catch (Exception $e) {
+        sleep(1);
+        header("Location: " . "../index.php?error=globalErrorBooking");
+        throw new Exception("Registration error" . $e->getMessage(), 1);
+    }
+}
+
 function updateStatusBooking($status, $idAppt)
 {
     $db = connectDB();

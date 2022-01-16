@@ -4,6 +4,41 @@ const menu = document.querySelector(".list-chat-menu");
 // Settings
 const btnSettings = document.getElementById("settings");
 const settings = document.getElementById("settings-container");
+// Delete Booking
+const btnDeleteMyBookings = document.getElementById("deleteMyBookings");
+if (btnDeleteMyBookings) {
+    btnDeleteMyBookings.addEventListener("click", () => {
+        clearTimeout(getBooking); // Stop fetching
+        let confirm = window.confirm("Voulez-vous supprimer la réservation ?");
+        if (confirm === true) {
+            let myUniqueCards = document.querySelectorAll(".unique-card-color");
+            let cardsToDelete = [];
+            myUniqueCards.forEach(el => {
+                cardsToDelete.push(el.closest(".booking-card"));
+            });
+            if (cardsToDelete.length > 0) {
+                console.log("oui");
+            } else {
+                console.log("non");
+                getBooking = setInterval(function() {
+                    fetchBooking();
+                }, 5000)
+            }
+            console.log(myUniqueCards);
+            console.log(cardsToDelete);
+            // console.log(true)
+        } else {
+            console.log(false);
+            getBooking = setInterval(function() {
+                fetchBooking();
+            }, 5000)
+        }
+    })
+}
+
+if (typeof username !== "undefined") {
+    console.log(username);
+}
 
 chat.addEventListener("click", () => {
     menu.classList.toggle("menu-open");

@@ -137,7 +137,7 @@ if(isset($_POST["submitBooking"])){
             <ul>
                 <li onclick="crate.toggle(true);" class="goToChat <?= isset($_SESSION['id']) ? '' : 'chat-list-disconnected' ?>"><img src="assets/img/discord.svg" alt="Chat en ligne" width="30" height="30" style="width:35px;">Chat en ligne</li>
                 <?= isset($_SESSION['id']) ? '<li id="settings"><img src="assets/img/wrench.svg" alt="Paramètres de compte" style="width:30px;">Paramètres</li>' : ''?>
-                <?= isset($_SESSION['id']) ? '<li><img src="assets/img/trash.svg" alt="Supprimer mes réservations" style="width:25px;">Supprimer toutes mes réservations</li>' : ''?>
+                <?= isset($_SESSION['id']) ? '<li id="deleteMyBookings"><img src="assets/img/trash.svg" alt="Supprimer mes réservations" style="width:25px;">Supprimer toutes mes réservations</li>' : ''?>
             </ul>
         </div>
     </div>
@@ -306,17 +306,25 @@ if(isset($_POST["submitBooking"])){
         </main>
         <div id="list-booking-ctn">
             <div class="list-booking-inner">
-                <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],1) : getBooking(false,1); ?>
-                <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],0) : getBooking(false,0); ?>
-                <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],2) : getBooking(false,2); ?>
-                <?php getBooking(false,1,true); ?>
+                <?php // isset($_SESSION["username"]) ? getBooking($_SESSION["username"],1) : getBooking(false,1); ?>
+                <?php // isset($_SESSION["username"]) ? getBooking($_SESSION["username"],0) : getBooking(false,0); ?>
+                <?php // isset($_SESSION["username"]) ? getBooking($_SESSION["username"],2) : getBooking(false,2); ?>
+                <?php // getBooking(false,1,true); ?>
             </div>
         </div>
     </div>
-    <script src="js/script.js"></script>
+    <script>
+    <?php
+    if(isset($_SESSION['username'])){
+        $username = $_SESSION['username'];
+        echo "const username='$username'";
+    }
+    ?>
+    </script>
     <script src="js/scroll.js"></script>
-    <script src="js/weather/weather.js"></script>
+    <script src="js/script.js"></script>
     <script src="js/chat.js"></script>
+    <script src="js/weather/weather.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async>
         const crate = new Crate({
             server: '930393641485209660',

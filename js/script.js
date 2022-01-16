@@ -21,28 +21,6 @@ const infoIcon = document.querySelector(".info-icon");
 let serverResponse = null;
 let confirm = null;
 let xhr = null;
-if (deleteBooking != undefined || deleteBooking != null) {
-    for (let i = 0; i < deleteBooking.length; i++) {
-        deleteBooking[i].onclick = function(e) {
-            clearInterval(getBooking);
-            if (messageSuccess !== undefined || messageSuccess !== null || contentMessage !== undefined || contentMessage !== null) {
-                if (messageSuccess.classList.contains("message-ajax-anim")) {
-                    e.preventDefault();
-                    console.log("Patientez...");
-                } else {
-                    let confirm = window.confirm("Voulez-vous supprimer la réservation ?");
-                    if (confirm) {
-                        fetchDeleteBooking(this.parentNode.id, this.parentNode)
-                    } else {
-                        getBooking = setInterval(function() {
-                            fetchBooking();
-                        }, 5000)
-                    }
-                }
-            }
-        }
-    }
-}
 
 function fetchDeleteBooking(id, deleteElement) {
     xhr = new XMLHttpRequest();
@@ -123,6 +101,8 @@ function fetchBooking() {
     xhttp.open("GET", "functions/functionGetBooking.php", true);
     xhttp.send();
 }
+
+fetchBooking();
 
 let getBooking = setInterval(function() {
     fetchBooking();
