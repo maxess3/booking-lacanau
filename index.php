@@ -1,14 +1,28 @@
 <?php 
 
+session_start(); 
+
 require_once("functions/function.php");
 
 require_once("template/searchbarBooking.php");
 
-session_start(); 
-
 $today = date("Y-m-d");
 
-if(isset($_POST["submit"])){
+if(isset($_POST["submitSettings"])){
+    if(isset($_SESSION['id'])){
+        if(isset($_POST['mail-notification'])){
+            if($_POST['mail-notification'] === 'on'){
+                updateSettings('1',$_SESSION['id']);
+                $_SESSION['notification'] = '1';
+            } 
+        } else {
+            updateSettings('0',$_SESSION['id']);
+            $_SESSION['notification'] = '0';
+        }
+    }
+}
+
+if(isset($_POST["submitBooking"])){
     if(isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && isset($_SESSION['password'])){
         $idUser = $_SESSION['id'];
         $username = $_SESSION['username'];
@@ -30,7 +44,9 @@ if(isset($_POST["submit"])){
                             if($dateCheckIn < $dateCheckOut){
                                 if(notBooked($dateCheckIn,$dateCheckOut)){
                                     insertBooking($idUser,$people,$dateCheckIn,$dateCheckOut,$hourCheckIn,$hourCheckOut,$username,$firstname,$lastname);
-                                    sendUserCreateBookingMail($people, $firstname, $email, $dateCheckIn, $dateCheckOut);
+                                    if($notification === "1"){
+                                        sendUserCreateBookingMail($people, $firstname, $email, $dateCheckIn, $dateCheckOut);
+                                    }
                                     sendAdminCreateBookingMail($people, $username, $firstname, $lastname, $dateCheckIn, $dateCheckOut);
                                     $_GET["register"] = "bookingSuccess";
                                 } else {
@@ -66,7 +82,7 @@ if(isset($_POST["submit"])){
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1,user-scalable=0">
     <meta name="description" content="Site de réservation pour l'appartement de la résidence Océanide de Lacanau">
     <title>Lacanau | Réserver l'appartement</title>
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
@@ -85,6 +101,46 @@ if(isset($_POST["submit"])){
     <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
 </head>
 <body>
+<?php
+    if(isset($_SESSION['notification'])){
+        if($_SESSION['notification'] === '1'){
+            $settings = '<div id="settings-container">
+                        <form action="" id="form-settings" method="POST">
+                            <span>Paramètres du compte</span>
+                            <div>
+                                <input type="checkbox" id="mail-notification" name="mail-notification" checked/>
+                                <label for="mail-notification">Activer les notifications par email</label>
+                            </div>
+                        <input type="submit" value="Enregister" name="submitSettings">
+                    </form>
+                </div>';
+        } else {
+            $settings = '<div id="settings-container">
+            <form action="" id="form-settings" method="POST">
+                <span>Paramètres du compte</span>
+                <div>
+                    <input type="checkbox" id="mail-notification" name="mail-notification"/>
+                    <label for="mail-notification">Activer les notifications par email</label>
+                </div>
+            <input type="submit" value="Enregister" name="submitSettings">
+            </form>
+            </div>';
+        }
+        echo $settings;
+    }
+?>
+    <div id="chat-menu">
+        <div id="inner-chat-menu">
+            <img src="assets/img/plus-solid.svg" alt="Plus de fonctionnalité">
+        </div>
+        <div class="list-chat-menu">
+            <ul>
+                <li onclick="crate.toggle(true);" class="goToChat <?= isset($_SESSION['id']) ? '' : 'chat-list-disconnected' ?>"><img src="assets/img/discord.svg" alt="Chat en ligne" width="30" height="30" style="width:35px;">Chat en ligne</li>
+                <?= isset($_SESSION['id']) ? '<li id="settings"><img src="assets/img/wrench.svg" alt="Paramètres de compte" style="width:30px;">Paramètres</li>' : ''?>
+                <?= isset($_SESSION['id']) ? '<li><img src="assets/img/trash.svg" alt="Supprimer mes réservations" style="width:25px;">Supprimer toutes mes réservations</li>' : ''?>
+            </ul>
+        </div>
+    </div>
     <div id="booking-ctn">
         <div style="display: none;" class="message-ajax">
             <p class="content-message-ajax"></p>
@@ -260,5 +316,16 @@ if(isset($_POST["submit"])){
     <script src="js/script.js"></script>
     <script src="js/scroll.js"></script>
     <script src="js/weather/weather.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async>
+        const crate = new Crate({
+            server: '930393641485209660',
+            channel: '930393642173087786',
+            defer:true,
+            color: "transparent",
+            glyph: ["assets/img/reset.png","200px"],
+            location: ["bottom","right"]
+        })
+    </script>
 </body>
 </html>

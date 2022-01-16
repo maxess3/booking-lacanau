@@ -2,6 +2,10 @@
 
 ob_start();
 
+date_default_timezone_set('Europe/London');
+
+$datetime = new DateTime('tomorrow');
+
 ?>
 
 <div class="inner-form">
@@ -19,14 +23,14 @@ ob_start();
     </div>
     <div>
         <label for="date-checkout">Jour de départ :</label>
-        <input type="date" id="date-checkout" name="date-checkout" value="<?= isset($_POST['date-checkout']) && !empty($_POST['date-checkout']) ? $_POST['date-checkout'] : "" ?>">
+        <input type="date" id="date-checkout" name="date-checkout" value="<?= isset($_POST['date-checkout']) && !empty($_POST['date-checkout']) ? $_POST['date-checkout'] : $datetime->format('Y-m-d')?>">
     </div>
     <div>           
         <label for="hour-checkout">Heure du départ :</label>
         <input type="time" id="hour-checkout" name="hour-checkout" value="<?= isset($_POST['hour-checkout']) && !empty($_POST['hour-checkout']) ? $_POST['hour-checkout'] : "12:00" ?>">
     </div>
     <div class="btn-booking">           
-        <button type="submit" id="submit-booking" name="submit">Réserver</button>
+        <button type="submit" id="submit-booking" name="submitBooking">Réserver</button>
     </div>
 </div>
 
@@ -35,7 +39,7 @@ ob_start();
 $searchBarConnected = ob_get_clean();
 
 ?>
-    <button type="submit" id="submit-booking" name="submit"  class="connect-btn">Se connecter</button>
+    <button type="submit" id="submit-booking" name="submitBooking"  class="connect-btn">Se connecter</button>
 <?php
 
 $searchBarNotConnected = ob_get_clean();

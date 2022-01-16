@@ -6,16 +6,16 @@ require_once("mail.php");
 
 function connectDB()
 {
-    // // $servername = "localhost:8889";
+    $servername = "localhost:8889";
     // $servername = "localhost";
-    // $username = "root";
-    // // $password = "root";
+    $username = "root";
+    $password = "root";
     // $password = "root";
-    // $dbname = "booking";
-    $servername = "localhost";
-    $username = "olym5493_maxime";
-    $password = "i+NJRvB.fgWS";
-    $dbname = "olym5493_booking";
+    $dbname = "booking";
+    // $servername = "localhost";
+    // $username = "olym5493_maxime";
+    // $password = "i+NJRvB.fgWS";
+    // $dbname = "olym5493_booking";
     try {
         $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -71,7 +71,7 @@ function insertUser($username, $firstname, $lastname, $email, $notification, $pa
         $stmt->closeCursor();
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "/booking-lacanau/register.php");
+        header("Location: " . "/register.php?error=sameID");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
@@ -528,6 +528,19 @@ function notBooked($dateCheckIn, $dateCheckOut)
     }
 }
 
+function updateSettings($notification,$id){
+    $db = connectDB();
+    try {
+        $sql = "UPDATE User SET notification = ? WHERE id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($notification,$id));
+    } catch (Exception $e) {
+        sleep(1);
+        header("Location: " . "../index.php?error=global");
+        throw new Exception("Registration error" . $e->getMessage(), 1);
+    }
+}
+
 function getBookingAdmin($status)
 {
     $db = connectDB();
@@ -584,7 +597,7 @@ function printMessage($info)
         if (!empty($info)) {
             switch ($info) {
                 case "sameID":
-                    echo "Le nom d'utilisateur est déja pris, veuillez réessayer";
+                    echo "Le nom d'utilisateur ou l'email est déja pris, veuillez réessayer";
                     break;
                 case "blank":
                     echo "Sheeeesh, tous les champs ne sont pas remplis";
@@ -594,6 +607,9 @@ function printMessage($info)
                     break;
                 case "valid":
                     echo "Inscription validée, connectez-vous à présent";
+                    break;
+                case "disconnected":
+                    echo "Vous êtes déconnecté.";
                     break;
                 case "emptyUsername":
                     echo "Veuillez renseigner un nom d'utilisateur";

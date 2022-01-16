@@ -1,58 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-a {
-    color: white;
-    text-decoration: none;
-    list-style: none;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    overflow-x: hidden;
-    background-color: rgb(34, 34, 34);
-}
-
-button,
-input[type="button"] {
-    -webkit-appearance: none;
-}
-
-.connect-btn {
-    -webkit-appearance: none;
-    border: 0;
-    position: relative;
-    padding: 20px 30px;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #0083bb;
-    cursor: pointer;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 1.2em;
-    transition: all 0.2s ease;
-}
-
-.main-not-connected .connect-btn {
-    min-width: 230px;
-}
-
-.connect-btn:hover {
-    transition: all 0.2s ease;
-    background-color: #00567b;
-}
-
-.connect-btn:focus {
-    background-color: rgb(85, 85, 85);
-}
-
 @keyframes opacity {
     0% {
         opacity: 0;
@@ -60,6 +5,49 @@ input[type="button"] {
     }
     100% {
         opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes settings-opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes opacityListMenuResponsive {
+    0% {
+        opacity: 0;
+        bottom: 0vh;
+    }
+    100% {
+        opacity: 1;
+        bottom: 10vh;
+    }
+}
+
+@keyframes opacityListMenu {
+    0% {
+        opacity: 0;
+        bottom: 160px;
+    }
+    100% {
+        opacity: 1;
+        bottom: 180px;
+    }
+}
+
+@keyframes listmenu {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.92);
+    }
+    100% {
         transform: scale(1);
     }
 }
@@ -100,6 +88,72 @@ input[type="button"] {
     100% {
         border: 5px dotted transparent;
     }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    list-style: none;
+}
+
+img {
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: rgb(34, 34, 34);
+    touch-action: pan-x pan-y;
+}
+
+button,
+input[type="button"] {
+    -webkit-appearance: none;
+}
+
+.connect-btn {
+    -webkit-appearance: none;
+    border: 0;
+    position: relative;
+    padding: 20px 30px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #0083bb;
+    cursor: pointer;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: all 0.2s ease;
+}
+
+.main-not-connected .connect-btn {
+    min-width: 230px;
+}
+
+.connect-btn:hover {
+    transition: all 0.2s ease;
+    background-color: #00567b;
+}
+
+.connect-btn:focus {
+    background-color: rgb(85, 85, 85);
 }
 
 ::placeholder {
@@ -146,6 +200,166 @@ body {
     width: 100%;
 }
 
+#settings-container {
+    cursor: pointer;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(43 72 116 / 97%);
+    z-index: 2000;
+}
+
+#settings-container form {
+    cursor: initial;
+    padding: 50px;
+    border-radius: 10px;
+    flex-direction: column;
+    background-color: rgb(6 31 52);
+    display: flex;
+}
+
+#settings-container form span {
+    border-bottom: 3px solid #0083bb;
+    font-size: 1.8em;
+    text-align: left;
+    display: inline-block;
+    margin-bottom: 50px;
+    font-weight: 400;
+}
+
+#settings-container form label {
+    opacity: 0.96;
+    user-select: none;
+    cursor: pointer;
+    margin-left: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#settings-container form input[type=checkbox] {
+    color: red !important;
+    transform: scale(2);
+    margin-left: 7px;
+}
+
+#settings-container form input[type=submit] {
+    -webkit-appearance: none;
+    border: 0;
+    padding: 20px 30px;
+    border-radius: 10px;
+    background-color: #0083bb;
+    cursor: pointer;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 0.03em;
+    transition: all 0.2s ease;
+    margin-top: 40px;
+}
+
+#settings-container form input[type=submit]:hover {
+    transition: all 0.2s ease;
+    background-color: #00567b;
+}
+
+.open-settings {
+    display: flex !important;
+    animation: settings-opacity 0.2s ease;
+}
+
+iframe {
+    width: 60%;
+    height: 62.5vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+#chat-menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 3000;
+}
+
+#inner-chat-menu {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+    left: 50px;
+    bottom: 50px;
+    background-color: #0083bb;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    border: 9px solid rgb(0 0 0 / 29%);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.animMenu {
+    animation: listmenu 0.3s ease forwards;
+}
+
+#inner-chat-menu:hover img {
+    transition: opacity 0.2s ease;
+    opacity: 1;
+}
+
+#inner-chat-menu img {
+    transition: opacity 0.2s ease;
+    width: 35%;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.chat-list-disconnected {
+    border-radius: 10px !important;
+}
+
+.list-chat-menu {
+    cursor: pointer;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    bottom: 180px;
+    left: 50px;
+    width: 250px;
+    display: none;
+}
+
+.menu-open {
+    display: flex;
+    animation: opacityListMenu 0.2s ease forwards;
+}
+
+.list-chat-menu ul li {
+    user-select: none;
+    padding: 25px;
+    align-items: center;
+    display: flex;
+    list-style: none;
+    background-color: #0083bb;
+}
+
+.list-chat-menu ul li img {
+    margin-right: 15px;
+    user-select: none;
+}
+
+.list-chat-menu ul li:hover {
+    background-color: #00648f;
+}
+
+.list-chat-menu ul li:first-child {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.list-chat-menu ul li:last-child {
+    border-radius: 0px 0px 10px 10px;
+}
+
 #booking-ctn {
     width: 100%;
 }
@@ -166,7 +380,7 @@ body {
 
 .info-weather-open {
     display: flex !important;
-    z-index: 2000;
+    z-index: 4000;
 }
 
 .info-weather-inner {
@@ -226,7 +440,7 @@ svg {
 }
 
 .load-temp-info {
-    font-size: 3.5em !important;
+    font-size: 2.5em !important;
 }
 
 .degree-temp {
@@ -671,6 +885,7 @@ svg {
 }
 
 .no-booking {
+    user-select: none;
     width: 700px;
     background-color: rgb(41, 41, 41);
     border-radius: 8px;
@@ -759,6 +974,7 @@ svg {
 }
 
 .info-booking-status {
+    user-select: none;
     width: 100%;
     padding: 10px 0;
     margin-bottom: 20px;
@@ -845,10 +1061,17 @@ svg {
 }
 
 @media screen and (max-width: 1500px) {
+    iframe {
+        width: 50%;
+        height: 62.5vh;
+    }
     .inner-form>div:not(.inner-form div: last-child) {
         padding: 30px 15px;
         width: 100%;
         font-size: 1em;
+    }
+    .inner-form>div:not(.inner-form div:last-child)::after {
+        display: none;
     }
     .btn-booking button {
         padding: 10px 15px;
@@ -856,6 +1079,54 @@ svg {
 }
 
 @media screen and (max-width: 1200px) {
+    #list-booking-ctn {
+        padding-bottom: 120px;
+    }
+    .menu-open {
+        animation: opacityListMenuResponsive 0.2s ease forwards;
+    }
+    #inner-chat-menu img {
+        transition: opacity 0.2s ease;
+        width: 65px;
+        height: 65px;
+        padding: 20px;
+        border-radius: 50%;
+    }
+    #inner-chat-menu {
+        z-index: 10000;
+        position: absolute;
+        background-color: #2a2a2a;
+        cursor: pointer;
+        align-items: center;
+        border-radius: 0px 0px 0px 0px;
+        height: 10vh;
+        left: 0px;
+        bottom: 0px;
+        width: 100%;
+        border: 0px solid rgb(57, 57, 57);
+    }
+    .list-chat-menu {
+        background-color: #525252;
+        bottom: 10vh;
+        left: 0px;
+        width: 100%;
+    }
+    .list-chat-menu ul {
+        width: 100%;
+    }
+    .list-chat-menu ul li {
+        background-color: #525252;
+        border-radius: 0px !important;
+    }
+    .list-chat-menu ul li:hover {
+        background-color: #0083bb;
+    }
+    .list-chat-menu ul li:nth-child(even) {
+        background-color: #595959;
+    }
+    .list-chat-menu ul li:nth-child(even):hover {
+        background-color: #0083bb;
+    }
     .list-booking-inner {
         width: 800px;
         margin: 50px auto;
@@ -879,7 +1150,7 @@ svg {
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .close-info-weather {
         right: 6%;
         top: -12%;
@@ -1026,7 +1297,7 @@ svg {
     .info-temp-water,
     .info-temp-air,
     .info-swell {
-        font-size: 2em;
+        font-size: 2em !important;
     }
     .status {
         width: 50%;
@@ -1054,5 +1325,11 @@ svg {
 @media screen and (max-height: 500px) {
     .child-main-ctn {
         height: initial;
+    }
+}
+
+@media (pointer: coarse) {
+    .menu-open {
+        animation: none;
     }
 }
