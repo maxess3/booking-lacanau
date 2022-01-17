@@ -522,13 +522,13 @@ svg {
     height: 50px;
     background-color: rgb(42, 42, 42);
     border-radius: 100%;
-    margin-left: 30px;
+    margin-left: 25px;
     transition: all 0.2s ease;
     cursor: pointer;
 }
 
 .weather:hover {
-    background-color: rgb(233, 130, 3);
+    background-color: #0083bb;
     transition: all 0.2s ease;
 }
 
@@ -545,18 +545,16 @@ svg {
 }
 
 .profile-ctn:hover {
-    background-color: rgb(233, 130, 3);
+    background-color: #0083bb;
     transition: all 0.2s ease;
 }
 
 .inner-profile-ctn {
     display: flex;
-    justify-content: center;
-    align-items: center;
     margin-bottom: 2px;
 }
 
-.booking-manage {
+.logout {
     cursor: pointer;
     border-radius: 50%;
     display: inline-flex;
@@ -564,8 +562,19 @@ svg {
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: rgb(211, 41, 41);
-    margin-right: 20px;
+    background-color: red;
+}
+
+.booking-manage {
+    margin-right: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(155 99 0);
 }
 
 .inner-profile-ctn img {

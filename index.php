@@ -245,6 +245,7 @@ if(isset($_POST["submitBooking"])){
             </div>
         </div>
         <main id="main-ctn" class="<?= isset($_SESSION['id']) ? "" : "main-not-connected" ?>">
+        <?php // include("radio.php"); ?>
             <div class="video">
                 <video autoplay muted loop id="lacanau-video">
                     <source src="assets/img/sea.mp4" type="video/mp4">
@@ -264,20 +265,20 @@ if(isset($_POST["submitBooking"])){
                         if(empty($_SESSION)){
                             echo '<div class="profile-ctn">
                                     <div class="inner-profile-ctn">
-                                        <img src="assets/img/user.svg" alt="Se connecter">
+                                        <img src="assets/img/sign-in.svg" alt="Se connecter">
                                     </div>
                                 </div>';
                         } else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
                             echo '<div class="logout-ctn">
                             <div class="inner-profile-ctn">
                                 <a href="admin.php"><span class="booking-manage"><img src="assets/img/pencil.svg" alt="Accueil réservation"></span></a>
-                                <a href="logout.php">Se déconnecter</a>
+                                <a href="logout.php"><span class="logout"><img src="assets/img/logout.svg" alt="Voir la méteo" style="width: 1.4em;position:relative;left:2px;"></span></a>
                             </div>
                         </div>';
                         } else {
                             echo '<div class="logout-ctn">
                             <div class="inner-profile-ctn">
-                                <a href="logout.php">Se déconnecter</a>
+                                <a href="logout.php"><span class="logout"><img src="assets/img/logout.svg" alt="Voir la méteo" style="width: 1.4em;position:relative;left:2px;"></span></a>
                             </div>
                         </div>';
                         }
