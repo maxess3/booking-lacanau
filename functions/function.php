@@ -119,7 +119,7 @@ function deletePersonalBookings($username)
         ON Appartment.id = Book.id_appartment
         INNER JOIN User
         ON Book.id_user = User.id
-        WHERE User.username = ?";
+        WHERE User.username = ? AND Appartment.date_checkout >= NOW();";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($username));
         $stmt->closeCursor();
