@@ -2,11 +2,17 @@
 
 /* BASIC */
 
+* {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
 html {
     background-color: #56baed;
 }
 
 body {
+    touch-action: pan-x pan-y;
     font-family: "Poppins", sans-serif;
     min-height: 900px;
     display: flex;
