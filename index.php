@@ -306,24 +306,22 @@ if(isset($_POST["submitBooking"])){
         </main>
         <div id="list-booking-ctn">
             <div class="list-booking-inner">
-                <?php // isset($_SESSION["username"]) ? getBooking($_SESSION["username"],1) : getBooking(false,1); ?>
-                <?php // isset($_SESSION["username"]) ? getBooking($_SESSION["username"],0) : getBooking(false,0); ?>
-                <?php // isset($_SESSION["username"]) ? getBooking($_SESSION["username"],2) : getBooking(false,2); ?>
-                <?php // getBooking(false,1,true); ?>
+                <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],1) : getBooking(false,1); ?>
+                <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],0) : getBooking(false,0); ?>
+                <?php isset($_SESSION["username"]) ? getBooking($_SESSION["username"],2) : getBooking(false,2); ?>
+                <?php getBooking(false,1,true); ?>
             </div>
         </div>
     </div>
-    <script>
     <?php
     if(isset($_SESSION['username'])){
         $username = $_SESSION['username'];
-        echo "const username='$username'";
+        echo "<script>const username='$username';</script>";
     }
     ?>
-    </script>
-    <script src="js/scroll.js"></script>
     <script src="js/script.js"></script>
     <script src="js/chat.js"></script>
+    <script src="js/scroll.js"></script>
     <script src="js/weather/weather.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async>
         const crate = new Crate({

@@ -1,6 +1,12 @@
 <?php 
 
+session_start();
+
 require_once("functions/function.php"); 
+
+if(isset($_SESSION['id'])){
+  header("Location: index.php");
+}
 
 if(isset($_POST['submit'])){
     if(isset($_POST['username-login']) && isset($_POST['password-login'])){
@@ -21,7 +27,7 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1,user-scalable=0">
     <title>Formulaire de connexion</title>
     <link rel="stylesheet" href="css/style2.css">
     <link rel="stylesheet" href="css/error.css">

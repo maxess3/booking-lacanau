@@ -88,7 +88,7 @@ function insertBooking($idUser, $people, $dateCheckIn, $dateCheckOut, $hourCheck
         $stmt->closeCursor();
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "../index.php?error=globalErrorBooking");
+        header("Location: " . "index.php?error=globalErrorBooking");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
@@ -104,29 +104,29 @@ function deleteBooking($idAppartment)
         return true;
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "../index.php?error=globalErrorBooking");
+        header("Location: " . "index.php?error=globalErrorBooking");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
 
-function deleteMyBookings($idAppartment)
+function deletePersonalBookings($username)
 {
     $db = connectDB();
     try {
         $sql = "DELETE Appartment
-        From Appartment
+        FROM Appartment
         INNER JOIN Book
         ON Appartment.id = Book.id_appartment
         INNER JOIN User
         ON Book.id_user = User.id
-        WHERE User.id = 12";
+        WHERE User.username = ?";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($idAppartment));
+        $stmt->execute(array($username));
         $stmt->closeCursor();
         return true;
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "../index.php?error=globalErrorBooking");
+        header("Location: " . "index.php?error=globalErrorBooking");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
@@ -145,7 +145,7 @@ function updateStatusBooking($status, $idAppt)
         consentUser($status,$idAppt);
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "../index.php?error=globalErrorBooking");
+        header("Location: " . "index.php?error=globalErrorBooking");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
@@ -183,7 +183,7 @@ function consentUser($status,$idAppt)
         $stmt->closeCursor();
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "../index.php?error=globalErrorBooking");
+        header("Location: " . "index.php?error=globalErrorBooking");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
@@ -545,7 +545,7 @@ function notBooked($dateCheckIn, $dateCheckOut)
         }
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "../index.php?error=sameID");
+        header("Location: " . "index.php?error=sameID");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
@@ -558,7 +558,7 @@ function updateSettings($notification,$id){
         $stmt->execute(array($notification,$id));
     } catch (Exception $e) {
         sleep(1);
-        header("Location: " . "../index.php?error=global");
+        header("Location: " . "index.php?error=globalErrorBooking");
         throw new Exception("Registration error" . $e->getMessage(), 1);
     }
 }
@@ -646,7 +646,7 @@ function printMessage($info)
                     echo "Vous n'avez pas les droits pour accéder à cette page";
                     break;
                 case "globalErrorBooking":
-                    echo "Oops, petit problème de création de la réservation, veuillez réessayer";
+                    echo "Oups, un problème est survenu";
                     break;
                 case "globalErrorDisplayBooking":
                     echo "Oops, problème de récupération des réservations";

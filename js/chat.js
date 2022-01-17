@@ -6,39 +6,6 @@ const btnSettings = document.getElementById("settings");
 const settings = document.getElementById("settings-container");
 // Delete Booking
 const btnDeleteMyBookings = document.getElementById("deleteMyBookings");
-if (btnDeleteMyBookings) {
-    btnDeleteMyBookings.addEventListener("click", () => {
-        clearTimeout(getBooking); // Stop fetching
-        let confirm = window.confirm("Voulez-vous supprimer la réservation ?");
-        if (confirm === true) {
-            let myUniqueCards = document.querySelectorAll(".unique-card-color");
-            let cardsToDelete = [];
-            myUniqueCards.forEach(el => {
-                cardsToDelete.push(el.closest(".booking-card"));
-            });
-            if (cardsToDelete.length > 0) {
-                console.log("oui");
-            } else {
-                console.log("non");
-                getBooking = setInterval(function() {
-                    fetchBooking();
-                }, 5000)
-            }
-            console.log(myUniqueCards);
-            console.log(cardsToDelete);
-            // console.log(true)
-        } else {
-            console.log(false);
-            getBooking = setInterval(function() {
-                fetchBooking();
-            }, 5000)
-        }
-    })
-}
-
-if (typeof username !== "undefined") {
-    console.log(username);
-}
 
 chat.addEventListener("click", () => {
     menu.classList.toggle("menu-open");
@@ -72,6 +39,37 @@ if (settings) {
     settings.addEventListener("click", (e) => {
         if (settings.classList.contains("open-settings") && !e.target.closest("#form-settings")) {
             settings.classList.remove("open-settings");
+        }
+    })
+}
+
+if (btnDeleteMyBookings) {
+    btnDeleteMyBookings.addEventListener("click", () => {
+        clearTimeout(getBooking);
+        let confirm = window.confirm("🚨 Voulez-vous supprimer toutes vos réservations ?");
+        if (confirm === true) {
+            let myUniqueCards = document.querySelectorAll(".unique-card-color");
+            let cardsToDelete = [];
+            myUniqueCards.forEach(el => {
+                cardsToDelete.push(el.closest(".booking-card"));
+            });
+            if (cardsToDelete.length > 0 && typeof username !== undefined) {
+                fetchDeletePersonalBookings(username, cardsToDelete);
+            } else {
+                contentMessage.textContent = "Suppression impossible, vous n'avez pas de réservations...";
+                infoIcon.src = "assets/img/error.png";
+                messageSuccess.classList.remove("message-ajax-anim");
+                window.requestAnimationFrame(function() {
+                    messageSuccess.classList.add('message-ajax-anim');
+                })
+                getBooking = setInterval(function() {
+                    fetchBooking();
+                }, 5000);
+            }
+        } else {
+            getBooking = setInterval(function() {
+                fetchBooking();
+            }, 5000)
         }
     })
 }
